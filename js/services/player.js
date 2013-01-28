@@ -37,12 +37,20 @@ WeXBMC.factory('Player', ['XbmcRpc', function(XbmcRpc) {
 			isActive = (activePlayer !== null);
 
 			if (isActive) {
-				return XbmcRpc.Player.GetProperties(activePlayer.playerid, PLAYER_PROPERTY_NAMES).then(function(properties) {
-					properties.playerid = activePlayer.playerid;
-					activePlayer = properties;
-				});
+				return XbmcRpc.Player.GetProperties(activePlayer.playerid, PLAYER_PROPERTY_NAMES).then(updatePlayerProperties);
 			}
 		});
+	}
+
+	function updatePlayerProperties(properties) {
+		var hasChanged = false;
+
+		angular.forEach(properties, function(newValue, prop) {
+			hasChanged = (hasChanged || (activePlayer[prop] !== newValue));
+			activePlayer[prop] = newValue;
+		});
+
+		return activePlayer;
 	}
 
 	function autoUpdate() {
@@ -52,8 +60,6 @@ WeXBMC.factory('Player', ['XbmcRpc', function(XbmcRpc) {
 	}
 
 	return {
-		isActive : function() {
-			return isActive;
 		},
 		autoupdate : function(on) {
 			// always clear the timeout
@@ -66,13 +72,21 @@ WeXBMC.factory('Player', ['XbmcRpc', function(XbmcRpc) {
 		},
 		play : function() {
 			if (isActive && activePlayer.speed === 0) {
-				return XbmcRpc.Player.PlayPause(activePlayer.playerid);
+				return XbmcRpc.Player.PlayPause(activePlayer.playerid).then(updatePlayerProperties);
 			}
 		},
 		pause : function() {
 			if (isActive && activePlayer.speed > 0) {
-				return XbmcRpc.Player.PlayPause(activePlayer.playerid);
+				return XbmcRpc.Player.PlayPause(activePlayer.playerid).then(updatePlayerProperties);
 			}
+		},
+
+		// State inspection functions
+		isActive : function() {
+			return isActive;
+		},
+		isPlaying : function() {
+			return activePlayer.speed > 0;
 		},
 	}
 }]);
