@@ -9,9 +9,9 @@ WeXBMC.factory('XbmcRpc', ['$http', function($http) {
 			"params"  : params || {},
 		}).then(function(response) {
 			// TODO - Does XBMC really return *both* of these? JSON-RPC says it should be singular...
-			if (response.data.result) {
+			if (response.data.hasOwnProperty('result')) {
 				return response.data.result;
-			} else if (response.data.results) {
+			} else if (response.data.hasOwnProperty('results')) {
 				return response.data.results;
 			} else {
 				throw "JSON-RPC Failed (method : " + command + ")" + JSON.stringify(response.data);

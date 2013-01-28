@@ -17,4 +17,19 @@ window.jasmine && (function(win) {
 		return mock;
 	})();
 
+	beforeEach(module('wexbmc'));
+	beforeEach(inject(function($injector) {
+		JsonRpc.$httpBackend = $injector.get('$httpBackend');
+	}));
+
+	afterEach(function() {
+		if (JsonRpc.$httpBackend) {
+			JsonRpc.$httpBackend.verifyNoOutstandingRequest();
+		}
+	});
+
+	function getCurrentSpec() {
+		return jasmine.getEnv().currentSpec;
+	}
+
 })(window);

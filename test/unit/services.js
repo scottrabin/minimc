@@ -10,8 +10,6 @@ describe('services', function() {
 		});
 	});
 
-	beforeEach(module('wexbmc'));
-
 	describe('XbmcRpc', function() {
 		var $httpBackend, XbmcRpcService,
 			results,
@@ -31,9 +29,12 @@ describe('services', function() {
 					"jsonrpc" : "2.0",
 					"method"  : "VideoLibrary.GetMovies",
 					"params"  : {},
-				}).respond(200);
+				}).respond(200, jsonrpcSuccess({
+					"movies" : [],
+				}));
 
 				XbmcRpcService.getMovies();
+				$httpBackend.flush();
 			});
 
 			it('should access the `movies` property from the return payload and return it as an array', function() {

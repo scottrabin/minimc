@@ -13,19 +13,15 @@ describe('services', function() {
 		});
 	});
 
-	beforeEach(module('wexbmc'));
-
 	describe('Player', function() {
-		var PlayerService, $httpBackend;
+		var PlayerService;
 
-		beforeEach(inject(function(_$httpBackend_, Player) {
-			JsonRpc.$httpBackend = $httpBackend = _$httpBackend_;
+		beforeEach(inject(function(Player) {
 			PlayerService = Player;
 		}));
 
 		afterEach(function() {
 			PlayerService.autoupdate(false);
-			$httpBackend.verifyNoOutstandingRequest();
 		});
 
 		it('should automatically update when the current active player changes', function() {
