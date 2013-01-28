@@ -1,9 +1,33 @@
 "use strict";
 
 WeXBMC.factory('Player', ['XbmcRpc', function(XbmcRpc) {
+	var PLAYER_PROPERTY_NAMES = [
+		"type",
+		"partymode",
+		"speed",
+		"time",
+		"percentage",
+		"totaltime",
+		"playlistid",
+		"position",
+		"repeat",
+		"shuffled",
+		"canseek",
+		"canchangespeed",
+		"canmove",
+		"canzoom",
+		"canrotate",
+		"canshuffle",
+		"canrepeat",
+		"currentaudiostream",
+		"audiostreams",
+		"subtitleenabled",
+		"currentsubtitle",
+		"subtitles"
+	];
+
 	var activePlayer = null,
 		isActive = false,
-		speed = 0,
 		activePlayerUpdateTimer;
 
 	function updateActivePlayer() {
@@ -11,6 +35,13 @@ WeXBMC.factory('Player', ['XbmcRpc', function(XbmcRpc) {
 			activePlayer = players[0] || null;
 
 			isActive = (activePlayer !== null);
+
+			if (isActive) {
+				return XbmcRpc.Player.GetProperties(activePlayer.playerid, PLAYER_PROPERTY_NAMES).then(function(properties) {
+					properties.playerid = activePlayer.playerid;
+					activePlayer = properties;
+				});
+			}
 		});
 	}
 
@@ -25,19 +56,21 @@ WeXBMC.factory('Player', ['XbmcRpc', function(XbmcRpc) {
 			return isActive;
 		},
 		autoupdate : function(on) {
+			// always clear the timeout
+			clearTimeout(activePlayerUpdateTimer);
+
 			if (on) {
+				// attempt to restart the update checker if specified
 				updateActivePlayer().then(autoUpdate);
-			} else {
-				clearTimeout(activePlayerUpdateTimer);
 			}
 		},
 		play : function() {
-			if (isActive && speed === 0) {
+			if (isActive && activePlayer.speed === 0) {
 				return XbmcRpc.Player.PlayPause(activePlayer.playerid);
 			}
 		},
 		pause : function() {
-			if (isActive && speed > 0) {
+			if (isActive && activePlayer.speed > 0) {
 				return XbmcRpc.Player.PlayPause(activePlayer.playerid);
 			}
 		},

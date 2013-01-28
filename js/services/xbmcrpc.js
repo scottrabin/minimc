@@ -29,6 +29,12 @@ WeXBMC.factory('XbmcRpc', ['$http', function($http) {
 			getActivePlayers : function() {
 				return sendCommand('Player.GetActivePlayers', null);
 			},
+			GetProperties : function(playerId, properties) {
+				return sendCommand('Player.GetProperties', {
+					"playerid"   : playerId,
+					"properties" : (Array.isArray(properties) ? properties : [properties]),
+				});
+			},
 			PlayPause : function(playerId) {
 				return sendCommand('Player.PlayPause', { "playerid" : playerId });
 			},
