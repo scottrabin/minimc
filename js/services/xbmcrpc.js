@@ -21,9 +21,6 @@ WeXBMC.factory('XbmcRpc', ['$http', function($http) {
 
 	return {
 		getMovies : function() {
-			return sendCommand('VideoLibrary.GetMovies', null).then(function(response) {
-				return response.movies;
-			});
 		},
 		Player : {
 			getActivePlayers : function() {
@@ -37,6 +34,11 @@ WeXBMC.factory('XbmcRpc', ['$http', function($http) {
 			},
 			PlayPause : function(playerId) {
 				return sendCommand('Player.PlayPause', { "playerid" : playerId });
+			},
+		},
+		VideoLibrary : {
+			GetMovies : function() {
+				return sendCommand('VideoLibrary.GetMovies', null);
 			},
 		},
 	};
