@@ -1,7 +1,20 @@
 window.jasmine && (function(win) {
 
-	function TestCtrl($scope) {}
+	window.JsonRpc = (function() {
+		var mock = {};
 
-	window.TestCtrl = TestCtrl;
+		mock.respondWith = function(data) {
+			mock.$httpBackend.expectPOST('/jsonrpc').respond(200, {
+				"jsonrpc" : "2.0",
+				"results" : data,
+			});
+		};
+
+		mock.respond = function() {
+			mock.$httpBackend.flush();
+		};
+
+		return mock;
+	})();
 
 })(window);
