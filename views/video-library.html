@@ -1,0 +1,6 @@
+<ul id="movies">
+	<li ng-repeat="movie in movies" ng-click="playMovie(movie)">
+		<img ng-src="{{movie.thumbnail | thumbnail}}" />
+		<span class="movie-name">{{movie.label}}</span>
+	</li>
+</ul>

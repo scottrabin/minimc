@@ -70,6 +70,12 @@ WeXBMC.factory('Player', ['XbmcRpc', function(XbmcRpc) {
 				updateActivePlayer().then(autoUpdate);
 			}
 		},
+		open : function(item) {
+			item = {
+				movieid : item.movieid,
+			};
+			return XbmcRpc.Player.Open( { item : item } );
+		},
 		play : function() {
 			if (isActive && activePlayer.speed === 0) {
 				return XbmcRpc.Player.PlayPause(activePlayer.playerid).then(updatePlayerProperties);

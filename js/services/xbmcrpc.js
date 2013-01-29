@@ -20,8 +20,6 @@ WeXBMC.factory('XbmcRpc', ['$http', function($http) {
 	}
 
 	return {
-		getMovies : function() {
-		},
 		Player : {
 			getActivePlayers : function() {
 				return sendCommand('Player.GetActivePlayers', null);
@@ -32,13 +30,26 @@ WeXBMC.factory('XbmcRpc', ['$http', function($http) {
 					"properties" : (Array.isArray(properties) ? properties : [properties]),
 				});
 			},
+			Open : function(item) {
+				return sendCommand('Player.Open', item);
+			},
 			PlayPause : function(playerId) {
 				return sendCommand('Player.PlayPause', { "playerid" : playerId });
 			},
 		},
 		VideoLibrary : {
-			GetMovies : function() {
-				return sendCommand('VideoLibrary.GetMovies', null);
+			GetMovies : function(properties, limits, sort) {
+				var request = {};
+				if (properties) {
+					request.properties = properties;
+				}
+				if (limits) {
+					request.limits = limits;
+				}
+				if (sort) {
+					request.sort = sort;
+				}
+				return sendCommand('VideoLibrary.GetMovies', request);
 			},
 		},
 	};
