@@ -59,6 +59,10 @@ WeXBMC.factory('Player', ['XbmcRpc', function(XbmcRpc) {
 		}, 5000);
 	}
 
+	function playItem(item) {
+		return XbmcRpc.Player.Open( { item : item } );
+	}
+
 	return {
 		autoupdate : function(on) {
 			// always clear the timeout
@@ -84,6 +88,19 @@ WeXBMC.factory('Player', ['XbmcRpc', function(XbmcRpc) {
 			if (isActive && activePlayer.speed > 0) {
 				return XbmcRpc.Player.PlayPause(activePlayer.playerid).then(updatePlayerProperties);
 			}
+		},
+
+		/**
+		 * Play the specified movie
+		 */
+		playMovie : function(movie) {
+			return playItem({ movieid : movie.movieid });
+		},
+		/**
+		 * Play the specified episode
+		 */
+		playEpisode : function(episode) {
+			return playItem({ episodeid : episode.episodeid });
 		},
 
 		// State inspection functions

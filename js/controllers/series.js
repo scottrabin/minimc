@@ -1,4 +1,4 @@
-function SeriesCtrl($scope, $routeParams, VideoLibrary) {
+function SeriesCtrl($scope, $routeParams, VideoLibrary, Player) {
 	$scope.selected_season = 1;
 
 	$scope.seasons  = [];
@@ -7,4 +7,6 @@ function SeriesCtrl($scope, $routeParams, VideoLibrary) {
 		$scope.seasons  = VideoLibrary.getShowSeasons(tvShow);
 		$scope.episodes = VideoLibrary.getEpisodes(tvShow);
 	});
+
+	$scope.playEpisode = Player.playEpisode;
 }
