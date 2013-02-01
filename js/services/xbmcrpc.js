@@ -44,6 +44,20 @@ WeXBMC.factory('XbmcRpc', ['$http', function($http) {
 			PlayPause : function(playerId) {
 				return sendCommand('Player.PlayPause', { "playerid" : playerId });
 			},
+			/**
+			 * 5.6.17 Player.SetSpeed - Set the speed of the current playback
+			 * http://wiki.xbmc.org/index.php?title=JSON-RPC_API/v4#Player.SetSpeed
+			 *
+			 * @param {Player.Id} playerid
+			 * @param {*} speed
+			 * @returns {RpcPromise}
+			 */
+			SetSpeed : function(playerid, speed) {
+				return sendCommand('Player.SetSpeed', {
+					"playerid" : playerid,
+					"speed"    : speed,
+				});
+			},
 		},
 		VideoLibrary : {
 			/**

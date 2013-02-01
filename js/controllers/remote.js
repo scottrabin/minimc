@@ -8,6 +8,12 @@ function RemoteCtrl($scope, Player) {
 	$scope.isPlaying = Player.isPlaying;
 
 	$scope.togglePlayPause = Player.togglePlaying;
+	$scope.decreaseSpeed = function() {
+		Player.setSpeed('decrement');
+	};
+	$scope.increaseSpeed = function() {
+		Player.setSpeed('increment');
+	};
 
 	$scope.$on('$destroy', function() {
 		Player.autoupdate(false);
