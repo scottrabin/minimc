@@ -1,13 +1,8 @@
 ul {
 	padding: 0;
 }
-
-/* Mode selector for the interface */
-#mode {
-	text-align: center;
-	margin: 10px;
-}
-#mode a {
+/* general styles */
+.button {
 	display: inline-block;
 	width: 65px;
 	line-height: 60px;
@@ -19,6 +14,14 @@ ul {
 	border: 1px solid #bbb;
 	border-radius: 5px;
 	background: #eee;
+}
+
+/* Mode selector for the interface */
+#mode {
+	text-align: center;
+	margin: 10px;
+}
+#mode a {
 }
 
 #movies {
