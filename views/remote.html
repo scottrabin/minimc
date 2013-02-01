@@ -1,4 +1,3 @@
-<buttongroup>
-	<button ng-click="play()">Play</button>
-	<button ng-click="pause()">Pause</button>
-</buttongroup>
+<div class="buttongroup">
+	<button class="button" ng-class="{ 'icon-play': !isPlaying(), 'icon-pause': isPlaying() }" ng-click="togglePlayPause()"></button>
+</div>

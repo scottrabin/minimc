@@ -89,6 +89,9 @@ WeXBMC.factory('Player', ['XbmcRpc', function(XbmcRpc) {
 				return XbmcRpc.Player.PlayPause(activePlayer.playerid).then(updatePlayerProperties);
 			}
 		},
+		togglePlaying : function() {
+			return XbmcRpc.Player.PlayPause(activePlayer.playerid).then(updatePlayerProperties);
+		},
 
 		/**
 		 * Play the specified movie
@@ -108,7 +111,7 @@ WeXBMC.factory('Player', ['XbmcRpc', function(XbmcRpc) {
 			return isActive;
 		},
 		isPlaying : function() {
-			return activePlayer.speed > 0;
+			return activePlayer && activePlayer.speed > 0;
 		},
 	}
 }]);
