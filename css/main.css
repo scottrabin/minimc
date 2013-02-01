@@ -1,3 +1,7 @@
+ul {
+	padding: 0;
+}
+
 #movies {
 	list-style-type: none;
 }
@@ -11,4 +15,31 @@
 	max-height: 180px;
 	display: block;
 	margin: 0 auto;
+}
+
+/* Season selector (horizontal list at /tv-shows/show-slug) */
+.series-season {
+	list-style-type: none;
+	white-space: nowrap;
+	overflow: auto;
+}
+.series-season li {
+	display: inline-block;
+	width: 175px;
+}
+.series-season li img {
+	width: 100%;
+}
+
+/* Episode selector (vertical list under /tv-shows/show-slug season selector) */
+.series-episodes {
+	list-style-type: none;
+}
+.series-episodes li {
+	height: 60px;
+	line-height: 60px;
+}
+.series-episodes li img {
+	height: 100%;
+	vertical-align: middle;
 }

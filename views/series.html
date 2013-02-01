@@ -1,0 +1,11 @@
+<ul class="series-season">
+	<li ng-repeat="season in seasons" ng-click="$parent.selected_season = season.season">
+	<img ng-src="{{ season.thumbnail | thumbnail }}" />
+	</li>
+</ul>
+<ul class="series-episodes">
+	<li ng-repeat="episode in episodes | filter:{season: selected_season}">
+	<img ng-src="{{ episode.thumbnail | thumbnail }}" />
+	{{ episode.title }}
+	</li>
+</ul>

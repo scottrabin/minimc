@@ -47,6 +47,26 @@ WeXBMC.factory('XbmcRpc', ['$http', function($http) {
 		},
 		VideoLibrary : {
 			/**
+			 * 5.9.4 VideoLibrary.GetEpisodes - Retrieve all tv show episodes
+			 * http://wiki.xbmc.org/index.php?title=JSON-RPC_API/v4#VideoLibrary.GetEpisodes
+			 *
+			 * @param {Library.Id=} tvshowid
+			 * @param {Number=} season
+			 * @param {Video.Fields.Episode=} properties
+			 * @param {List.Limits=} limits
+			 * @param {List.Sort=} sort
+			 * @returns {RpcPromise}
+			 */
+			GetEpisodes : function(tvshowid, season, properties, limits, sort) {
+				return sendCommand('VideoLibrary.GetEpisodes', {
+					"tvshowid"   : tvshowid || -1,
+					"season"     : _undef,
+					"properties" : properties,
+					"limits"     : limits,
+					"sort"       : sort,
+				});
+			},
+			/**
 			 * 5.9.9 VideoLibrary.GetMovies - Retrieve all movies
 			 * http://wiki.xbmc.org/index.php?title=JSON-RPC_API/v4#VideoLibrary.GetMovies
 			 */
