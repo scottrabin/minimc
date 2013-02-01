@@ -91,7 +91,6 @@ WeXBMC.factory('VideoLibrary', ['XbmcRpc', '$filter', function(XbmcRpc, $filter)
 		"resume",
 		"tvshowid"
 	];
-	var __slugMap = {};
 
 	var VideoLibraryService = {};
 
@@ -103,9 +102,6 @@ WeXBMC.factory('VideoLibrary', ['XbmcRpc', '$filter', function(XbmcRpc, $filter)
 
 	VideoLibraryService.getShows = function() {
 		return XbmcRpc.VideoLibrary.GetTVShows(VIDEO_FIELDS_TVSHOW).then(function(results) {
-			for(var i = 0, l = results.tvshows.length ; i < l; i++) {
-				__slugMap[ $filter('slug')(results.tvshows[i].title) ] = results.tvshows[i];
-			}
 			return results.tvshows;
 		});
 	};
@@ -117,7 +113,16 @@ WeXBMC.factory('VideoLibrary', ['XbmcRpc', '$filter', function(XbmcRpc, $filter)
 	};
 
 	VideoLibraryService.getShowFromSlug = function(showSlug) {
-		return __slugMap[showSlug];
+		// TODO - Cache this? Store it locally and query against a map? Or is the use
+		// case generally low enough latency that this isn't really a problem?
+		return VideoLibraryService.getShows().then(function(shows) {
+			for (var i = 0 ; i < shows.length ; i++) {
+				if (showSlug === $filter('slug')(shows[i].title)) {
+					return shows[i];
+				}
+			}
+			throw "Could not find TV show matching slug [ " + showSlug + " ]";
+		});
 	};
 
 	VideoLibraryService.getEpisodes = function(tv_show) {

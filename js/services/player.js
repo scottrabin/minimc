@@ -60,7 +60,6 @@ WeXBMC.factory('Player', ['XbmcRpc', function(XbmcRpc) {
 	}
 
 	return {
-		},
 		autoupdate : function(on) {
 			// always clear the timeout
 			clearTimeout(activePlayerUpdateTimer);
