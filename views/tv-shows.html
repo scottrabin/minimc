@@ -1,0 +1,6 @@
+<ul id="tv-shows">
+	<li ng-repeat="series in tv_series" ng-click="selectTVSeries(series)">
+		<img ng-src="{{ series.thumbnail | thumbnail }}" />
+		<span class="series-name">{{ series.title }}</span>
+	</li>
+</ul>
