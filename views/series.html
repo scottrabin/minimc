@@ -1,6 +1,7 @@
 <ul class="series-season">
 	<li ng-repeat="season in seasons" ng-click="$parent.selected_season = season.season">
-	<img ng-src="{{ season.thumbnail | thumbnail }}" />
+		<img ng-src="{{ season.thumbnail | thumbnail }}" />
+		<span class="season-number">{{ season.season }}</span>
 	</li>
 </ul>
 <ul class="series-episodes">
