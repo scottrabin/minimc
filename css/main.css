@@ -54,6 +54,9 @@ ul {
 	display: inline-block;
 	height: 250px;
 }
+.series-season li ~ li {
+	margin-left: 3px;
+}
 .series-season li img {
 	height: 100%;
 }
@@ -79,6 +82,7 @@ ul {
 .series-episodes li {
 	height: 60px;
 	line-height: 60px;
+	margin: 10px;
 }
 .series-episodes li img {
 	height: 100%;
