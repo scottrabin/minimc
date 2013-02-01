@@ -97,6 +97,28 @@ WeXBMC.factory('Player', ['XbmcRpc', function(XbmcRpc) {
 		},
 
 		/**
+		 * Gets the available subtitles for the active stream
+		 * TODO - why is this data not associated with videos?
+		 */
+		getSubtitles : function() {
+			return (activePlayer ? activePlayer.subtitles : []);
+		},
+		getCurrentSubtitle : function() {
+			return (activePlayer && activePlayer.currentsubtitle);
+		},
+		setSubtitle : function(subtitle) {
+			return (subtitle ?
+					XbmcRpc.Player.SetSubtitle(activePlayer.playerid, 'on').then(function() {
+						return XbmcRpc.Player.SetSubtitle(activePlayer.playerid, subtitle.index);
+					}) :
+					XbmcRpc.Player.SetSubtitle(activePlayer.playerid, 'off')
+				   );
+		},
+		areSubtitlesEnabled : function() {
+			return activePlayer && activePlayer.subtitleenabled;
+		},
+
+		/**
 		 * Play the specified movie
 		 */
 		playMovie : function(movie) {

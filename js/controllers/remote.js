@@ -15,6 +15,11 @@ function RemoteCtrl($scope, Player) {
 		Player.setSpeed('increment');
 	};
 
+	$scope.subtitles = Player.getSubtitles;
+	$scope.currentSubtitle = Player.getCurrentSubtitle;
+	$scope.subtitleEnabled = Player.areSubtitlesEnabled;
+	$scope.setSubtitle = Player.setSubtitle;
+
 	$scope.$on('$destroy', function() {
 		Player.autoupdate(false);
 	});

@@ -15,6 +15,9 @@ ul {
 	border-radius: 5px;
 	background: #eee;
 }
+.button.active {
+	background: #aaa;
+}
 
 /* Mode selector for the interface */
 #mode {
@@ -64,4 +67,15 @@ ul {
 .series-episodes li img {
 	height: 100%;
 	vertical-align: middle;
+}
+
+/* remote */
+.subtitles {
+	margin: 20px 0;
+}
+.subtitles .button {
+	width: auto;
+	height: auto;
+	line-height: 22px;
+	font-size: 15px;
 }

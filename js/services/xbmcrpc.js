@@ -58,6 +58,20 @@ WeXBMC.factory('XbmcRpc', ['$http', function($http) {
 					"speed"    : speed,
 				});
 			},
+			/**
+			 * 5.6.18 Player.SetSubtitle - Set the subtitle displayed by the player
+			 * http://wiki.xbmc.org/index.php?title=JSON-RPC_API/v4#Player.SetSubtitle
+			 *
+			 * @param {Player.Id} playerid
+			 * @param {*} subtitle
+			 * @returns {RpcPromise}
+			 */
+			SetSubtitle : function(playerid, subtitle) {
+				return sendCommand('Player.SetSubtitle', {
+					"playerid" : playerid,
+					"subtitle" : subtitle,
+				});
+			},
 		},
 		VideoLibrary : {
 			/**
