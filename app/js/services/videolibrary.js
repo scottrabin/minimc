@@ -3,8 +3,9 @@
 define(
 [
 	'js/services/XbmcRpc',
+	'js/filters/slug',
 ],
-function(XbmcRpc) {
+function(XbmcRpc, slugFilter) {
 
 	var VIDEO_PROPERTY_NAMES = [
 		"title",
@@ -121,7 +122,7 @@ function(XbmcRpc) {
 		// case generally low enough latency that this isn't really a problem?
 		return VideoLibraryService.getShows().then(function(shows) {
 			for (var i = 0 ; i < shows.length ; i++) {
-				if (showSlug === $filter('slug')(shows[i].title)) {
+				if (showSlug === slugFilter(shows[i].title)) {
 					return shows[i];
 				}
 			}

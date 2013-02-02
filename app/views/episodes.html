@@ -1,0 +1,16 @@
+<ol class="series-season">
+	{{#each season}}
+		<li>
+			<img src="{{ thumbnail_path thumbnail }}" />
+			<span class="season-number">{{ season }}</span>
+		</li>
+	{{/each}}
+</ol>
+<ol class="series-episodes">
+	{{#each episode}}
+		<li>
+			<img src="{{ thumbnail_path thumbnail }}" />
+			<span class="episode-title">{{ title }}</span>
+		</li>
+	{{/each}}
+</ol>

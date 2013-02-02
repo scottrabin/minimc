@@ -1,6 +1,5 @@
 {{#each tv_shows}}
-	<li>
+	<a href="#/tv-shows/{{slug title}}">
 		<img alt="{{title}}" src="{{thumbnail_path thumbnail}}" />
-		<span class="tv-show-name">{{title}}</span>
-	</li>
+	</a>
 {{/each}}

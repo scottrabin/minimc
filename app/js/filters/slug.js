@@ -1,7 +1,12 @@
 'use strict';
 
-WeXBMC.filter('slug', function() {
-	return function(str) {
+define(
+[
+	'handlebars',
+],
+function(Handlebars) {
+
+	function slug(str) {
 		return str.
 			// lower case
 			toLowerCase().
@@ -13,4 +18,8 @@ WeXBMC.filter('slug', function() {
 			// trim leading/trailing dashes
 			replace(/^-+|-+$/g, '');
 	};
+
+	Handlebars.registerHelper( 'slug', slug );
+
+	return slug;
 });
