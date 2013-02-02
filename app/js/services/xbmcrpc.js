@@ -1,4 +1,10 @@
-WeXBMC.factory('XbmcRpc', ['$http', function($http) {
+'use strict';
+
+define(
+[
+	'js/services/Ajax',
+],
+function(Ajax) {
 	var id = 0;
 	var _undef;
 
@@ -10,19 +16,19 @@ WeXBMC.factory('XbmcRpc', ['$http', function($http) {
 				delete params[parameter];
 			}
 		}
-		return $http.post('/jsonrpc', {
+		return Ajax.post('/jsonrpc', {
 			"id"      : id++,
 			"jsonrpc" : "2.0",
 			"method"  : command,
 			"params"  : params,
 		}).then(function(response) {
 			// TODO - Does XBMC really return *both* of these? JSON-RPC says it should be singular...
-			if (response.data.hasOwnProperty('result')) {
-				return response.data.result;
-			} else if (response.data.hasOwnProperty('results')) {
-				return response.data.results;
+			if (response.hasOwnProperty('result')) {
+				return response.result;
+			} else if (response.hasOwnProperty('results')) {
+				return response.results;
 			} else {
-				throw "JSON-RPC Failed (method : " + command + ")" + JSON.stringify(response.data);
+				throw "JSON-RPC Failed (method : " + command + ")" + JSON.stringify(response);
 			}
 		});
 	}
@@ -148,4 +154,5 @@ WeXBMC.factory('XbmcRpc', ['$http', function($http) {
 			},
 		},
 	};
-}]);
+
+});

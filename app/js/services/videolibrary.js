@@ -1,6 +1,10 @@
 "use strict";
 
-WeXBMC.factory('VideoLibrary', ['XbmcRpc', '$filter', function(XbmcRpc, $filter) {
+define(
+[
+	'js/services/XbmcRpc',
+],
+function(XbmcRpc) {
 
 	var VIDEO_PROPERTY_NAMES = [
 		"title",
@@ -132,4 +136,5 @@ WeXBMC.factory('VideoLibrary', ['XbmcRpc', '$filter', function(XbmcRpc, $filter)
 	};
 
 	return VideoLibraryService;
-}]);
+
+});
