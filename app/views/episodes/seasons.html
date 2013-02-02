@@ -1,0 +1,6 @@
+{{#each seasons}}
+	<li><a href="#/tv-shows/{{slug showtitle}}/S{{lpad season 2}}">
+		<img src="{{ thumbnail_path thumbnail }}" />
+		<span class="season-number">{{ season }}</span>
+	</a></li>
+{{/each}}

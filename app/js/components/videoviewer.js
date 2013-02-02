@@ -6,8 +6,9 @@ define(
 	'js/components/movieviewer',
 	'js/components/tvshowviewer',
 	'js/components/episodeviewer',
+	'hbs!views/videolibrary',
 ],
-function(defineComponent, movieViewer, tvShowViewer, episodeViewer) {
+function(defineComponent, movieViewer, tvShowViewer, episodeViewer, templateVideoLibrary) {
 
 	return defineComponent(videoViewer);
 
@@ -40,6 +41,8 @@ function(defineComponent, movieViewer, tvShowViewer, episodeViewer) {
 
 		// bind events
 		this.after('initialize', function() {
+			this.$node.html(templateVideoLibrary());
+
 			this.on(document, 'viewMovies', this.viewMovies);
 			this.on(document, 'viewTVShows', this.viewTVShows);
 			this.on(document, 'viewEpisodes', this.viewEpisodes);

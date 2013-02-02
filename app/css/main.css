@@ -53,24 +53,24 @@ ul {
 }
 
 /* Season selector (horizontal list at /tv-shows/show-slug) */
-.series-season {
+.season-selector {
 	list-style-type: none;
 	white-space: nowrap;
 	overflow: auto;
 	-webkit-overflow-scrolling: touch;
 }
-.series-season li {
+.season-selector li {
 	position: relative;
 	display: inline-block;
 	height: 250px;
 }
-.series-season li ~ li {
+.season-selector li ~ li {
 	margin-left: 3px;
 }
-.series-season li img {
+.season-selector li img {
 	height: 100%;
 }
-.series-season li .season-number {
+.season-selector li .season-number {
 	display: block;
 	position: absolute;
 	bottom: 4px;
@@ -86,15 +86,15 @@ ul {
 }
 
 /* Episode selector (vertical list under /tv-shows/show-slug season selector) */
-.series-episodes {
+.episode-selector {
 	list-style-type: none;
 }
-.series-episodes li {
+.episode-selector li {
 	height: 60px;
 	line-height: 60px;
 	margin: 10px;
 }
-.series-episodes li img {
+.episode-selector li img {
 	height: 100%;
 	vertical-align: middle;
 }

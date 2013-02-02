@@ -1,7 +1,12 @@
 require.config({
+	shim : {
+		"underscore" : {
+			exports : '_',
+		},
+	},
 	paths : {
 		"hbs" : "components/require-handlebars-plugin/hbs",
-		"underscore" : "components/require-handlebars-plugin/hbs/underscore",
+		"underscore" : "components/underscore/underscore",
 		"handlebars" : "components/require-handlebars-plugin/Handlebars",
 		"i18nprecompile" : "components/require-handlebars-plugin/hbs/i18nprecompile",
 		"json2" : "components/require-handlebars-plugin/hbs/json2",

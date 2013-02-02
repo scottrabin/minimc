@@ -4,7 +4,7 @@ define(
 [
 	'components/flight/lib/component',
 	'js/services/VideoLibrary',
-	'hbs!views/video-library',
+	'hbs!views/movies',
 ],
 function(defineComponent, VideoLibrary, movieTemplate) {
 

@@ -4,30 +4,59 @@ define(
 [
 	'components/flight/lib/component',
 	'js/services/VideoLibrary',
-	'components/when/when',
-	'hbs!views/episodes',
+	'components/when/debug',
+	'underscore',
+	'hbs!views/episodes/seasons',
+	'hbs!views/episodes/episodes',
 ],
-function(defineComponent, VideoLibrary, when, episodeTemplate) {
+function(defineComponent, VideoLibrary, when, _, seasonTemplate, episodeTemplate) {
 
 	return defineComponent(episodeViewer);
 
 	function episodeViewer() {
+		var showCache = {};
+		var currentShow, currentSeason = 1;
+
+		this.defaultAttrs({
+			"selectorSeasonList" : ".season-selector",
+			"selectorEpisodeList" : ".episode-selector",
+		});
 
 		this.after('initialize', function() {
-			var self = this;
 
-			this.on('show', function(event, showSlug) {
+			this.on('show', function(event, data) {
+				var self = this;
+				if (!showCache[data.title_slug]) {
+					showCache[data.title_slug] = VideoLibrary.getShowFromSlug(data.title_slug);
+				}
 
-				VideoLibrary.getShowFromSlug(showSlug).
-					then(function(show) {
-						return when.join( VideoLibrary.getShowSeasons(show), VideoLibrary.getEpisodes(show) );
-					}).
-					then(function(showData) {
-						self.node.innerHTML = episodeTemplate({
-							season  : showData[0],
-							episode : showData[1],
+				// if the title slug doesn't match, re-render the season selector
+				if (currentShow !== data.title_slug) {
+					showCache[data.title_slug].
+						then(VideoLibrary.getShowSeasons).
+						then(function(seasons) {
+							self.select('selectorSeasonList').html( seasonTemplate({
+								seasons       : seasons,
+								currentSeason : currentSeason,
+							}) );
 						});
-					});
+				}
+				// if the title slug doesn't match or the requested season has changed, re-render the episode selector
+				if (currentShow !== data.title_slug || data.season !== currentSeason) {
+					showCache[data.title_slug].
+						then(VideoLibrary.getEpisodes).
+						then(function(episodes) {
+							self.select('selectorEpisodeList').html( episodeTemplate({
+								episodes : _.where(episodes, {season : currentSeason}),
+							}) );
+						});
+				}
+
+				currentShow = data.title_slug;
+				if (data.season) {
+					currentSeason = data.season;
+				}
+
 				this.$node.show();
 			});
 			this.on('hide', function() {
