@@ -1,3 +1,7 @@
+body {
+	/* make space for the fixed header */
+	margin-top: 82px;
+}
 ul {
 	padding: 0;
 }
@@ -21,8 +25,14 @@ ul {
 
 /* Mode selector for the interface */
 #mode {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	padding: 10px;
 	text-align: center;
-	margin: 10px;
+	background-color: white;
+	z-index: 1;
 }
 #mode a {
 }
