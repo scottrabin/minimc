@@ -1,5 +1,4 @@
 @import "compass/css3/border-radius";
-@import "compass/css3/images";
 
 .button {
 	display: inline-block;
@@ -11,12 +10,5 @@
 	font-size: 45px;
 	vertical-align: middle;
 
-	color: black;
-	border: 1px solid #bbb;
 	@include border-radius(60px);
-	@include background-with-css2-fallback(linear-gradient(top, #f7f7f7, #e7e7e7), #efefef);
-
-	&.active {
-		background: #aaa;
-	}
 }
