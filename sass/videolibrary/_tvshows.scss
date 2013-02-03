@@ -1,7 +1,22 @@
+/* Series selector */
+#tv-shows {
+	li {
+		margin: 4px auto;
+		display: block;
+		text-align: center;
+
+		img {
+			max-width: 100%;
+		}
+	}
+}
+
+/* Season selector (horizontal list at the top of /tv-shows/show-slug) */
 .season-selector {
 	list-style-type: none;
 	white-space: nowrap;
 	overflow: auto;
+	overflow-y: hidden;
 	-webkit-overflow-scrolling: touch;
 
 	li {
