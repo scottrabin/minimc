@@ -1,13 +1,25 @@
+@import "compass/css3/box-sizing";
+@import "compass/css3/transition";
+
 #remote {
+	@include box-sizing(border-box);
 	position: fixed;
 	top: 0;
 	left: 0;
 	right: 0;
-	height: 60px;
+	height: 76px;
+	min-height: 76px;
 	text-align: center;
 	padding: 8px;
+	overflow: hidden;
 
 	z-index: 1000;
+
+	@include single-transition(height, 750ms, ease);
+
+	&.dragging {
+		@include single-transition(none);
+	}
 
 	.button {
 		width: 60px;
@@ -18,5 +30,22 @@
 
 	.button.icon-pause {
 		font-size: 37px;
+	}
+
+	#playback-controls {
+		margin-bottom: 20px;
+	}
+
+	#grippy-grip {
+		position: absolute;
+		height: 15px;
+		width: 16px;
+		margin-left: -8px;
+		left: 50%;
+		bottom: 0;
+		border-style: solid;
+		border-color: white;
+		border-width: 1px 0 1px;
+		background-color: green;
 	}
 }

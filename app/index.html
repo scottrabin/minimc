@@ -11,9 +11,24 @@
 <body>
 
 <section id="remote">
-	<button class="button rewind icon-backward"></button>
-	<button class="button play-pause icon-play"></button>
-	<button class="button forward icon-forward"></button>
+	<section id="playback-controls">
+		<button class="button rewind icon-backward"></button>
+		<button class="button play-pause icon-play"></button>
+		<button class="button forward icon-forward"></button>
+	</section>
+	<div id="grippy-grip"></div>
+	<button class="button icon-stop"></button>
+	<section id="remote-navigation">
+		<button class="up"></button>
+		<button class="down"></button>
+		<button class="left"></button>
+		<button class="right"></button>
+		<button class="enter"></button>
+	</section>
+	<section id="playback-subtitles">
+		Subtitles:
+		<div id="subtitles-available"></div>
+	</section>
 </section>
 <section id="now-playing">
 	<span class="status"></span>
