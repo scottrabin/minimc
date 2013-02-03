@@ -9,6 +9,13 @@
 
 	z-index: 1000;
 
+	.button {
+		width: 60px;
+		height: 60px;
+		font-size: 45px;
+		@include border-radius(60px);
+	}
+
 	.button.icon-pause {
 		font-size: 37px;
 	}

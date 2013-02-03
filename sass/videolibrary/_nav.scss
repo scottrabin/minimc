@@ -1,0 +1,13 @@
+@import "compass/css3/box-sizing";
+
+#video-library {
+	nav {
+		padding: 8px;
+		overflow: hidden;
+		a {
+			@include box-sizing(border-box);
+			float: left;
+			width: 50%;
+		}
+	}
+}
