@@ -20,6 +20,13 @@
 		float: right;
 	}
 
+	* {
+		vertical-align: middle;
+	}
+	.status {
+		vertical-align: baseline;
+	}
+
 	&.active {
 		@include opacity(1);
 	}
