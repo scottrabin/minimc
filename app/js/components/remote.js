@@ -27,12 +27,20 @@ define([
 			Player.setSpeed('increment');
 		};
 
+		this.updateControl = function(event, speed) {
+			this.select('selectorPlayPause').
+				toggleClass('icon-play', speed !== 1).
+				toggleClass('icon-pause', speed === 1);
+		}
+
 		this.after('initialize', function() {
 			this.on('click', {
 				"selectorRewind" : this.rewind,
 				"selectorPlayPause" : this.togglePlayPause,
 				"selectorFastForward" : this.fastForward
 			});
+
+			this.on(document, 'playerSpeedChanged', this.updateControl);
 		});
 	}
 });

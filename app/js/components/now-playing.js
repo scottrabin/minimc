@@ -29,6 +29,9 @@ define([
 			this.select('selectorTitle').html( playerState.currentitem ? playerState.currentitem.title : 'None' );
 
 			this.updatePlayTime(playerState);
+
+			// trigger some specific global events
+			$(document).trigger('playerSpeedChanged', playerState.speed);
 		}
 
 		this.updatePlayTime = function(playerState) {
