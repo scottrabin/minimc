@@ -34,6 +34,44 @@ function(Ajax) {
 	}
 
 	return {
+		Input : {
+			/**
+			 * 5.4.2 Input.Down - Navigate down in GUI
+			 * http://TODO
+			 *
+			 * @returns {RpcPromise}
+			 */
+			Down : function() {
+				return sendCommand('Input.Down', null);
+			},
+			/**
+			 * 5.4.4 Input.Left - Navigate left in GUI
+			 * http://TODO
+			 *
+			 * @returns {RpcPromise}
+			 */
+			Left : function() {
+				return sendCommand('Input.Left', null);
+			},
+			/**
+			 * 5.4.5 Input.Right - Navigate right in GUI
+			 * http://TODO
+			 *
+			 * @returns {RpcPromise}
+			 */
+			Right : function() {
+				return sendCommand('Input.Right', null);
+			},
+			/**
+			 * 5.4.7 Input.Up - Navigate up in GUI
+			 * http://TODO
+			 *
+			 * @returns {RpcPromise}
+			 */
+			Up : function() {
+				return sendCommand('Input.Up', null);
+			},
+		},
 		Player : {
 			getActivePlayers : function() {
 				return sendCommand('Player.GetActivePlayers', null);

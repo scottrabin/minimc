@@ -3,9 +3,11 @@
 define([
 	'components/flight/lib/component',
 	'js/services/player',
-], function(defineComponent, Player) {
+	'js/services/Input',
+], function(defineComponent, Player, Input) {
 
 	var DRAG_THRESHOLD = 50;
+	var REGEX_ARROW_DIRECTION = /(up|down|left|right)/;
 
 	return defineComponent(remote);
 
@@ -17,6 +19,10 @@ define([
 			"selectorFastForward" : ".forward",
 			"selectorStop" : ".stop",
 			"selectorGrip" : "#grippy-grip",
+			"selectorArrowUp" : "#remote-navigation .arrow.up",
+			"selectorArrowDown" : "#remote-navigation .arrow.down",
+			"selectorArrowLeft" : "#remote-navigation .arrow.left",
+			"selectorArrowRight" : "#remote-navigation .arrow.right",
 		});
 
 		this.rewind = function() {
@@ -32,6 +38,10 @@ define([
 		};
 
 		this.stop = Player.stop;
+
+		this.move = function(event) {
+			Input.move( REGEX_ARROW_DIRECTION.exec($(event.target).attr('class'))[1] );
+		}
 
 		this.updateControl = function(event, speed) {
 			this.select('selectorPlayPause').
@@ -88,6 +98,10 @@ define([
 				"selectorPlayPause" : this.togglePlayPause,
 				"selectorFastForward" : this.fastForward,
 				"selectorStop" : this.stop,
+				"selectorArrowUp" : this.move,
+				"selectorArrowDown" : this.move,
+				"selectorArrowLeft" : this.move,
+				"selectorArrowRight" : this.move,
 			});
 
 			this.on(document, 'playerSpeedChanged', this.updateControl);

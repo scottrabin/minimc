@@ -48,4 +48,31 @@
 		border-width: 1px 0 1px;
 		background-color: green;
 	}
+
+	.arrow {
+		width: 0;
+		height: 0;
+		padding: 0;
+		background: transparent;
+		border-style: solid;
+		border-color: transparent;
+		border-width: 35px;
+
+		&.left {
+			border-left-width : 0;
+			border-right-color: green;
+		}
+		&.right {
+			border-right-width : 0;
+			border-left-color: green;
+		}
+		&.up {
+			border-top-width : 0;
+			border-bottom-color: green;
+		}
+		&.down {
+			border-bottom-width : 0;
+			border-top-color: green;
+		}
+	}
 }
