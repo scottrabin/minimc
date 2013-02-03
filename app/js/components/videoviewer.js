@@ -54,6 +54,7 @@ function(defineComponent, movieViewer, tvShowViewer, episodeViewer, videoDetails
 			this.on(document, 'viewTVShows', this.viewTVShows);
 			this.on(document, 'viewEpisodes', this.viewEpisodes);
 			this.on(document, 'viewEpisodeDetails', this.viewDetails);
+			this.on(document, 'viewMovieDetails', this.viewDetails);
 
 			movieViewer.attachTo(this.select('selectorMovieViewer'));
 			tvShowViewer.attachTo(this.select('selectorTVShowViewer'));

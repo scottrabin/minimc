@@ -105,6 +105,18 @@ function(XbmcRpc, slugFilter) {
 		});
 	};
 
+	VideoLibraryService.getMovieFromSlug = function(movieSlug) {
+		return VideoLibraryService.getMovies().
+			then(function(movies) {
+				for (var i = 0; i < movies.length ; i++) {
+					if (movieSlug === slugFilter(movies[i].title)) {
+						return movies[i]
+					}
+				}
+				throw "Could not find movie matching slug [ " + movieSlug + " ]";
+			});
+	}
+
 	VideoLibraryService.getShows = function() {
 		return XbmcRpc.VideoLibrary.GetTVShows(VIDEO_FIELDS_TVSHOW).then(function(results) {
 			return results.tvshows;

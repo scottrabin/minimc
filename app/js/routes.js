@@ -46,6 +46,9 @@ function(crossroads, _) {
 
 	crossroads.addRoute('/', go_to('/movies') );
 	crossroads.addRoute('/movies', trigger_event('viewMovies') );
+	crossroads.addRoute('/movies/{title_slug}',
+						trigger_event('viewMovieDetails', ['title_slug'])
+					   );
 	crossroads.addRoute('/tv-shows', trigger_event('viewTVShows') );
 	crossroads.addRoute('/tv-shows/{title_slug}',
 						trigger_event('viewEpisodes', ['title_slug'])

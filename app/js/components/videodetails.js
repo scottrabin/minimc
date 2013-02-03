@@ -34,18 +34,29 @@ function(defineComponent, VideoLibrary, Player, movieDetails, episodeDetails) {
 				}).
 				then(function(episode) {
 					self.$node.
+						removeClass('movie').
+						addClass('episode').
 						data( 'source', episode ).
 						html( episodeDetails(episode) );
 				});
 		};
 
+		this.showMovieDetails = function(event, movieData) {
+			var self = this;
+			VideoLibrary.getMovieFromSlug(movieData.title_slug).
+				then(function(movie) {
+					self.$node.
+						removeClass('episode').
+						addClass('movie').
+						data( 'source', movie ).
+						html( movieDetails(movie) );
+				});
+		};
+
 		this.playVideo = function(event) {
-			var source = this.$node.data('source');
-			if ( is_movie(source) ) {
-				Player.playMovie(source);
-			} else {
-				Player.playEpisode(source);
-			}
+			var playWhich = (this.$node.hasClass('movie') ? 'playMovie' : 'playEpisode');
+
+			Player[playWhich]( this.$node.data('source') );
 		}
 
 		this.after('initialize', function() {
@@ -57,6 +68,7 @@ function(defineComponent, VideoLibrary, Player, movieDetails, episodeDetails) {
 			});
 
 			this.on(document, 'viewEpisodeDetails', this.showEpisodeDetails);
+			this.on(document, 'viewMovieDetails', this.showMovieDetails);
 		});
 	}
 

@@ -1,6 +1,6 @@
 {{#each movies}}
-	<li>
+	<li><a href="#/movies/{{slug title}}" alt="{{title}}">
 		<img src="{{thumbnail_path thumbnail}}" />
 		<span class="movie-name">{{label}}</span>
-	</li>
+	</a></li>
 {{/each}}
