@@ -33,9 +33,12 @@ you can use the generic selector below, but it's slower:
 	font-weight: normal;
 	line-height: 1;
 	-webkit-font-smoothing: antialiased;
+
+	vertical-align: middle;
 }
 .icon-play:before {
 	content: "\e000";
+	margin-left: 0.10em;
 }
 .icon-pause:before {
 	content: "\e001";
@@ -45,9 +48,11 @@ you can use the generic selector below, but it's slower:
 }
 .icon-forward:before {
 	content: "\e003";
+	margin-left: 0.1em;
 }
 .icon-backward:before {
 	content: "\e004";
+	margin-left: -0.18em;
 }
 .icon-camera:before {
 	content: "\e005";
