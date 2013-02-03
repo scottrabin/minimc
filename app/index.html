@@ -9,6 +9,11 @@
 </head>
 <body>
 
+<section id="remote">
+	<button class="button rewind icon-backward"></button>
+	<button class="button play-pause icon-play"></button>
+	<button class="button forward icon-forward"></button>
+</section>
 <section id="video-library"></section>
 
 <script type="text/javascript" src="components/jquery/jquery.js"></script>
@@ -17,10 +22,15 @@
 require(
 [
 	'js/routes',
+	'js/components/remote',
 	'js/components/videoviewer',
+	'js/services/player',
 ],
-function(router, videoViewer) {
+function(router, remote, videoViewer, Player) {
+	remote.attachTo('#remote');
 	videoViewer.attachTo('#video-library');
+
+	Player.autoupdate(true);
 
 	$(window).trigger('hashchange');
 });

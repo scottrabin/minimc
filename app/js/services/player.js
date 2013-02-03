@@ -1,6 +1,8 @@
 "use strict";
 
-WeXBMC.factory('Player', ['XbmcRpc', function(XbmcRpc) {
+define([
+	'js/services/XbmcRpc',
+], function(XbmcRpc) {
 	var PLAYER_PROPERTY_NAMES = [
 		"type",
 		"partymode",
@@ -139,4 +141,4 @@ WeXBMC.factory('Player', ['XbmcRpc', function(XbmcRpc) {
 			return activePlayer && activePlayer.speed === 1;
 		},
 	}
-}]);
+});

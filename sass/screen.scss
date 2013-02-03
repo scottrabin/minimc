@@ -5,10 +5,6 @@
 
 @import "compass/reset";
 
-body {
-	/* make space for the fixed header */
-	margin-top: 82px;
-}
 ul, ol {
 	padding: 0;
 }
@@ -17,3 +13,4 @@ ul, ol {
 @import 'general/button';
 @import 'videolibrary/movies';
 @import 'videolibrary/tvshows';
+@import 'remote/remote';
