@@ -8,11 +8,9 @@
 
 	line-height: 16px;
 
+	z-index: 999;
+
 	.playtime {
 		float: right;
-	}
-
-	&.active {
-		background: #aaa;
 	}
 }

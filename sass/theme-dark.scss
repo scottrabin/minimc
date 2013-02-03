@@ -1,9 +1,16 @@
+$background-color: #262626;
+$text-color: #fafafa;
+$link-color: #429abe;
+
+$now-playing-background-color: #3a3a3a;
+
 body {
-	background: #262626;
-	color: #fafafa;
+	background: $background-color;
+	color: $text-color;
 }
 a {
-	color: #429abe;
+	color: $link-color;
 	text-decoration: none;
 }
 @import "theme/dark/button";
+@import "theme/dark/remote";
