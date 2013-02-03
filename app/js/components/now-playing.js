@@ -22,6 +22,8 @@ define([
 		});
 
 		function processPlayerStateChanged(playerState) {
+			this.trigger(playerState.currentitem ? 'show' : 'hide');
+
 			this.select('selectorStatus').
 				toggleClass('icon-play', playerState.speed !== 0).
 				toggleClass('icon-pause', playerState.speed === 0);
@@ -44,10 +46,21 @@ define([
 			}
 		}
 
+		this.show = function() {
+			this.$node.addClass('active');
+		};
+
+		this.hide = function() {
+			this.$node.removeClass('active');
+		};
+
 		this.after('initialize', function() {
 			var updateComponent = _.bind(processPlayerStateChanged, this);
 			Player.notify(updateComponent);
 			Player.update().then(updateComponent);
+
+			this.on('show', this.show);
+			this.on('hide', this.hide);
 		});
 	}
 });
