@@ -50,6 +50,14 @@ function(crossroads, _) {
 	crossroads.addRoute('/tv-shows/{title_slug}',
 						trigger_event('viewEpisodes', ['title_slug'])
 					   );
+	crossroads.addRoute(/tv-shows\/([^/]+)\/S(\d{2})E(\d{2})\/([^/]+)/,
+						trigger_event('viewEpisodeDetails', {
+							"title_slug" : function(args) { return args[0]; },
+							"season"     : function(args) { return parseInt(args[1], 10); },
+							"episode"    : function(args) { return parseInt(args[2], 10); },
+							"episode_slug" : function(args) { return args[3]; },
+						})
+					   );
 	crossroads.addRoute(/tv-shows\/([^/]+)\/S(\d{2})/,
 						trigger_event('viewEpisodes', {
 							"title_slug" : function(args) { return args[0]; },

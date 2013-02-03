@@ -130,6 +130,17 @@ function(XbmcRpc, slugFilter) {
 		});
 	};
 
+	VideoLibraryService.getEpisodeBySeasonEpisode = function(show, season, episode) {
+		return VideoLibraryService.getEpisodes(show).then(function(episodeList) {
+			for(var i = 0 ; i < episodeList.length ; i++) {
+				if (episodeList[i].season === season && episodeList[i].episode === episode) {
+					return episodeList[i];
+				}
+			}
+			throw "Could not find episode S" + season + "E" + episode + " of " + show.title;
+		});
+	}
+
 	VideoLibraryService.getEpisodes = function(tv_show) {
 		return XbmcRpc.VideoLibrary.GetEpisodes(tv_show.tvshowid, null, VIDEO_FIELDS_EPISODE).then(function(results) {
 			return results.episodes;

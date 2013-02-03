@@ -1,0 +1,28 @@
+@import "compass/css3/inline-block";
+
+#video-details {
+	.video-image {
+		margin: 10px auto;
+		max-width: 100%;
+		display: block;
+	}
+	h3 {
+		font-size: 30px;
+	}
+
+	.actor {
+		margin: 10px 5px;
+
+		.actor-photo {
+			width: 65px;
+			height: 65px;
+			@include inline-block;
+		}
+
+		img {
+			max-width: 100%;
+			max-height: 100%;
+			margin: auto;
+		}
+	}
+}

@@ -1,6 +1,6 @@
 {{#each episodes}}
-	<li>
+	<li><a href="#/tv-shows/{{slug showtitle}}/S{{lpad season 2}}E{{lpad episode 2}}/{{slug title}}">
 		<img src="{{ thumbnail_path thumbnail }}" />
 		<span class="episode-title">{{ title }}</span>
-	</li>
+	</a></li>
 {{/each}}
