@@ -4,7 +4,7 @@ define(
 [
 	'components/flight/lib/component',
 	'js/services/VideoLibrary',
-	'components/when/debug',
+	'when',
 	'underscore',
 	'hbs!views/episodes/seasons',
 	'hbs!views/episodes/episodes',

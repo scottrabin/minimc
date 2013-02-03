@@ -2,7 +2,7 @@
 
 define(
 [
-	'components/when/when',
+	'when',
 ],
 function(when) {
 	return {

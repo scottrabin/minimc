@@ -12,11 +12,11 @@ define([
 	return defineComponent(nowPlaying);
 
 	function nowPlaying() {
-		var intervalTimerUpdate;
 
 		this.defaultAttrs({
 			"selectorStatus" : ".status",
 			"selectorTitle"  : ".current-item",
+			"selectorPlayTime"    : ".playtime",
 			"selectorElapsedTime" : ".elapsed",
 			"selectorTotalTime"   : ".total",
 		});
@@ -35,12 +35,19 @@ define([
 		}
 
 		this.updatePlayTime = function(playerState) {
-			this.select('selectorElapsedTime').html( formatTime(playerState.time) );
-			this.select('selectorTotalTime').html( formatTime(playerState.totaltime) );
+			if (playerState.time && playerState.totaltime) {
+				this.select('selectorElapsedTime').html( formatTime(playerState.time) );
+				this.select('selectorTotalTime').html( formatTime(playerState.totaltime) );
+				this.select('selectorPlayTime').show();
+			} else {
+				this.select('selectorPlayTime').hide();
+			}
 		}
 
 		this.after('initialize', function() {
-			Player.notify(_.bind(processPlayerStateChanged, this));
+			var updateComponent = _.bind(processPlayerStateChanged, this);
+			Player.notify(updateComponent);
+			Player.update().then(updateComponent);
 		});
 	}
 });

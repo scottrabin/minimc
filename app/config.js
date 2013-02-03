@@ -14,6 +14,13 @@ require.config({
 		"crossroads" : "components/crossroads.js/dist/crossroads",
 		"signals" : "components/js-signals/dist/signals",
 	},
+	packages : [
+		{
+			"name"     : "when",
+			"location" : "components/when",
+			"main"     : "debug",
+		},
+	],
 	hbs : {
 		disableI18n: true,
 		helperPathCallback : function(name) {

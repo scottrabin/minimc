@@ -16,7 +16,7 @@ function(Ajax) {
 				delete params[parameter];
 			}
 		}
-		return Ajax.post('/jsonrpc', {
+		return Ajax.post('/jsonrpc?' + command, {
 			"id"      : id++,
 			"jsonrpc" : "2.0",
 			"method"  : command,

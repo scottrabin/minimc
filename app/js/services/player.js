@@ -78,7 +78,7 @@ define([
 	}
 
 	function updateCurrentlyPlaying(result) {
-		updatePlayerProperties( { currentitem : result.item } );
+		return updatePlayerProperties( { currentitem : result.item } );
 	}
 
 	function playItem(item) {
