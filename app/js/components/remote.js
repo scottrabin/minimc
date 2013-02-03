@@ -15,6 +15,7 @@ define([
 			"selectorRewind" : ".rewind",
 			"selectorPlayPause" : ".play-pause",
 			"selectorFastForward" : ".forward",
+			"selectorStop" : ".stop",
 			"selectorGrip" : "#grippy-grip",
 		});
 
@@ -29,6 +30,8 @@ define([
 		this.fastForward = function() {
 			Player.setSpeed('increment');
 		};
+
+		this.stop = Player.stop;
 
 		this.updateControl = function(event, speed) {
 			this.select('selectorPlayPause').
@@ -83,7 +86,8 @@ define([
 			this.on('click', {
 				"selectorRewind" : this.rewind,
 				"selectorPlayPause" : this.togglePlayPause,
-				"selectorFastForward" : this.fastForward
+				"selectorFastForward" : this.fastForward,
+				"selectorStop" : this.stop,
 			});
 
 			this.on(document, 'playerSpeedChanged', this.updateControl);

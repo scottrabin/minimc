@@ -101,6 +101,9 @@ define([
 				return XbmcRpc.Player.PlayPause(activePlayer.playerid).then(updatePlayerProperties);
 			}
 		},
+		stop : function() {
+			return XbmcRpc.Player.Stop(activePlayer.playerid);
+		},
 		togglePlaying : function() {
 			return XbmcRpc.Player.PlayPause(activePlayer.playerid).then(updatePlayerProperties);
 		},

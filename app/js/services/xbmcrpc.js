@@ -92,6 +92,18 @@ function(Ajax) {
 					"subtitle" : subtitle,
 				});
 			},
+			/**
+			 * 5.6.20 Player.Stop - Stops playback
+			 * http://TODO
+			 *
+			 * @param {Player.Id} playerid
+			 * @returns {RpcPromise}
+			 */
+			Stop : function(playerid) {
+				return sendCommand('Player.Stop', {
+					"playerid" : playerid,
+				});
+			},
 		},
 		VideoLibrary : {
 			/**
