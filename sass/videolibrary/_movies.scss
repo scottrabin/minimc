@@ -1,0 +1,16 @@
+#movies {
+	list-style-type: none;
+
+	li {
+		float: left;
+		width: 200px;
+		text-align: center;
+
+		img {
+			max-width: 180px;
+			max-height: 180px;
+			display: block;
+			margin: 0 auto;
+		}
+	}
+}
