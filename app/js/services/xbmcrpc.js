@@ -38,6 +38,20 @@ function(Ajax) {
 			getActivePlayers : function() {
 				return sendCommand('Player.GetActivePlayers', null);
 			},
+			/**
+			 * 5.6.2 Player.GetItem - Retrieves the currently played item
+			 * http://wiki.xbmc.org/index.php?title=JSON-RPC_API/v4#Player.GetItem
+			 *
+			 * @param {Player.Id} playerid
+			 * @param {List.Fields.All} properties
+			 * @return {RpcPromise}
+			 */
+			GetItem : function(playerid, properties) {
+				return sendCommand('Player.GetItem', {
+					"playerid"   : playerid,
+					"properties" : (Array.isArray(properties) ? properties : [properties]),
+				})
+			},
 			GetProperties : function(playerId, properties) {
 				return sendCommand('Player.GetProperties', {
 					"playerid"   : playerId,

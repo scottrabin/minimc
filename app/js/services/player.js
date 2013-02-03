@@ -2,7 +2,9 @@
 
 define([
 	'js/services/XbmcRpc',
-], function(XbmcRpc) {
+	'underscore',
+	'js/services/types/list.fields.all',
+], function(XbmcRpc, _, LIST_FIELDS_ALL) {
 	var PLAYER_PROPERTY_NAMES = [
 		"type",
 		"partymode",
@@ -28,37 +30,55 @@ define([
 		"subtitles"
 	];
 
-	var activePlayer = null,
-		isActive = false,
-		activePlayerUpdateTimer;
+	var activePlayer = {},
+		isActive     = false,
+		// list of callback functions when player state changes
+		__listeners   = [];
 
 	function updateActivePlayer() {
-		return XbmcRpc.Player.getActivePlayers().then(function(players) {
-			activePlayer = players[0] || null;
-
-			isActive = (activePlayer !== null);
-
-			if (isActive) {
+		return XbmcRpc.Player.getActivePlayers().
+			then(function(players) {
+				if (players.length > 0) {
+					return players[0];
+				} else {
+					throw new Error("No active players")
+				}
+			}).
+			then(updatePlayerProperties).
+			then(function(activePlayer) {
 				return XbmcRpc.Player.GetProperties(activePlayer.playerid, PLAYER_PROPERTY_NAMES).then(updatePlayerProperties);
-			}
+			}).
+			then(function(activePlayer) {
+				return XbmcRpc.Player.GetItem(activePlayer.playerid, LIST_FIELDS_ALL).then(updateCurrentlyPlaying);
+			});
+	};
+
+	function deactivatePlayer() {
+		_.each(activePlayer, function(v, k) {
+			delete activePlayer[k];
 		});
+		return activePlayer;
 	}
 
 	function updatePlayerProperties(properties) {
 		var hasChanged = false;
 
-		angular.forEach(properties, function(newValue, prop) {
-			hasChanged = (hasChanged || (activePlayer[prop] !== newValue));
+		_.each(properties, function(newValue, prop) {
+			hasChanged = (hasChanged || !_.isEqual(activePlayer[prop], newValue));
 			activePlayer[prop] = newValue;
 		});
+
+		if (hasChanged) {
+			_.each(__listeners, function(fn) {
+				fn(activePlayer);
+			});
+		}
 
 		return activePlayer;
 	}
 
-	function autoUpdate() {
-		activePlayerUpdateTimer = setTimeout(function() {
-			updateActivePlayer().then(autoUpdate);
-		}, 5000);
+	function updateCurrentlyPlaying(result) {
+		updatePlayerProperties( { currentitem : result.item } );
 	}
 
 	function playItem(item) {
@@ -66,20 +86,10 @@ define([
 	}
 
 	return {
-		autoupdate : function(on) {
-			// always clear the timeout
-			clearTimeout(activePlayerUpdateTimer);
-
-			if (on) {
-				// attempt to restart the update checker if specified
-				updateActivePlayer().then(autoUpdate);
-			}
-		},
-		open : function(item) {
-			item = {
-				movieid : item.movieid,
-			};
-			return XbmcRpc.Player.Open( { item : item } );
+		update : updateActivePlayer,
+		// Player service needs a way to notify interested parties that player state has changed
+		notify : function(listener) {
+			__listeners.push(listener);
 		},
 		play : function() {
 			if (isActive && activePlayer.speed === 0) {
