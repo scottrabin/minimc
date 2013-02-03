@@ -54,13 +54,37 @@
 	list-style-type: none;
 
 	li {
+		position: relative;
 		height: 60px;
 		line-height: 60px;
-		margin: 10px;
+		margin: 5px 10px;
+		overflow: hidden;
+
+		a {
+			display: block;
+		}
 
 		img {
+			float: left;
 			height: 100%;
 			vertical-align: middle;
+		}
+
+		.episode-title {
+			display: block;
+			margin-left: 120px;
+			font-size: 150%;
+		}
+
+		.episode-metadata {
+			float: right;
+			padding: 6px;
+			line-height: normal;
+			text-align: right;
+
+			.episode-number {
+				display: block;
+			}
 		}
 	}
 }

@@ -1,0 +1,18 @@
+@import "compass/css3/box-shadow";
+
+.season-selector {
+	a {
+		color: black;
+	}
+}
+
+.episode-selector {
+	a, a:visited {
+		color: $text-color;
+	}
+
+	li {
+		border: 1px solid #444;
+		@include box-shadow(1px 1px 4px rgba(0, 0, 0, 0.8));
+	}
+}
