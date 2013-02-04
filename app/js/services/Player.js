@@ -102,7 +102,7 @@ define([
 						return XbmcRpc.Player.SetSubtitle(activePlayer.playerid, subtitle.index);
 					}) :
 					XbmcRpc.Player.SetSubtitle(activePlayer.playerid, 'off')
-				   );
+				   ).then(updateActivePlayer);
 		},
 		areSubtitlesEnabled : function() {
 			return activePlayer && activePlayer.subtitleenabled;
