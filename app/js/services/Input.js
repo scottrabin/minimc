@@ -23,5 +23,8 @@ function(XbmcRpc) {
 		return XbmcRpc.Input.Select();
 	};
 
+	InputService.home = XbmcRpc.Input.Home;
+	InputService.back = XbmcRpc.Input.Back;
+
 	return InputService;
 });

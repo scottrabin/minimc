@@ -28,6 +28,8 @@ define([
 			"selectorGuiSelect" : "#remote-navigation .enter",
 			"selectorSubtitles" : "#playback-subtitles",
 			"selectorSubtitleButton" : "#playback-subtitles button",
+			"selectorHomeButton" : ".button.home",
+			"selectorBackButton" : ".button.back",
 		});
 
 		this.rewind = function() {
@@ -142,6 +144,8 @@ define([
 				"selectorArrowRight" : this.move,
 				"selectorGuiSelect" : this.guiSelect,
 				"selectorSubtitleButton" : this.activateSubtitle,
+				"selectorHomeButton" : Input.home,
+				"selectorBackButton" : Input.back,
 			});
 
 			this.on(document, 'playerSpeedChanged', this.updateControl);

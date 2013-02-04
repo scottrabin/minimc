@@ -36,8 +36,17 @@ function(Ajax) {
 	return {
 		Input : {
 			/**
+			 * 5.4.1 Input.Back - Goes back in GUI
+			 * http://wiki.xbmc.org/index.php?title=JSON-RPC_API/v4#Input.Back
+			 *
+			 * @returns {RpcPromise}
+			 */
+			Back : function() {
+				return sendCommand('Input.Back', null);
+			},
+			/**
 			 * 5.4.2 Input.Down - Navigate down in GUI
-			 * http://TODO
+			 * http://wiki.xbmc.org/index.php?title=JSON-RPC_API/v4#Input.Down
 			 *
 			 * @returns {RpcPromise}
 			 */
@@ -45,8 +54,17 @@ function(Ajax) {
 				return sendCommand('Input.Down', null);
 			},
 			/**
+			 * 5.4.3 Input.Home - Goes to home window in GUI
+			 * http://wiki.xbmc.org/index.php?title=JSON-RPC_API/v4#Input.Home
+			 *
+			 * @returns {RpcPromise}
+			 */
+			Home : function() {
+				return sendCommand('Input.Home', null);
+			},
+			/**
 			 * 5.4.4 Input.Left - Navigate left in GUI
-			 * http://TODO
+			 * http://wiki.xbmc.org/index.php?title=JSON-RPC_API/v4#Input.Left
 			 *
 			 * @returns {RpcPromise}
 			 */
@@ -55,7 +73,7 @@ function(Ajax) {
 			},
 			/**
 			 * 5.4.5 Input.Right - Navigate right in GUI
-			 * http://TODO
+			 * http://wiki.xbmc.org/index.php?title=JSON-RPC_API/v4#Input.Right
 			 *
 			 * @returns {RpcPromise}
 			 */
@@ -64,7 +82,7 @@ function(Ajax) {
 			},
 			/**
 			 * 5.4.6 Input.Select - Select current item in GUI
-			 * http://TODO
+			 * http://wiki.xbmc.org/index.php?title=JSON-RPC_API/v4#Input.Select
 			 *
 			 * @returns {RpcPromise}
 			 */
@@ -73,7 +91,7 @@ function(Ajax) {
 			},
 			/**
 			 * 5.4.7 Input.Up - Navigate up in GUI
-			 * http://TODO
+			 * http://wiki.xbmc.org/index.php?title=JSON-RPC_API/v4#Input.Up
 			 *
 			 * @returns {RpcPromise}
 			 */
