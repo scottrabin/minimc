@@ -3,17 +3,17 @@
 @import "compass/css3/box-shadow";
 
 .button {
-	color: #fafafa;
+	color: $button-text-color;
 	border: 1px solid #111;
 	font-size: 13px;
 	font-weight: bold;
 	padding: 3px 8px;
-	@include background-with-css2-fallback(linear-gradient(top, #6f6f6f, #606060), #666);
+	@include background-with-css2-fallback(linear-gradient(top, nth($button-background, 1), nth($button-background, 2)), #666);
 	@include border-radius(10px);
 	@include box-shadow(1px 1px 3px #111, inset 1px 1px 2px #888);
 
 	&.active, &:active {
-		@include background-with-css2-fallback(linear-gradient(top, #505050, #5f5f5f), #444);
+		@include background-with-css2-fallback(linear-gradient(top, nth($button-active-background, 1), nth($button-active-background, 2)), #444);
 		@include box-shadow(inset 1px 1px 1px #333);
 	}
 }

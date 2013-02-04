@@ -1,5 +1,21 @@
 #remote {
 	background-color: $background-color;
+
+	.arrow {
+		$button-avg-color: mix(nth($button-background, 1), nth($button-background, 2));
+		&.left {
+			border-right-color: $button-avg-color;
+		}
+		&.right {
+			border-left-color: $button-avg-color;
+		}
+		&.up {
+			border-bottom-color: $button-avg-color;
+		}
+		&.down {
+			border-top-color: $button-avg-color;
+		}
+	}
 }
 #now-playing {
 	background-color: $now-playing-background-color;
