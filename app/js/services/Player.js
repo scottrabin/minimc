@@ -4,39 +4,14 @@ define([
 	'js/services/XbmcRpc',
 	'underscore',
 	'js/services/types/list.fields.all',
-], function(XbmcRpc, _, LIST_FIELDS_ALL) {
-	var PLAYER_PROPERTY_NAMES = [
-		"type",
-		"partymode",
-		"speed",
-		"time",
-		"percentage",
-		"totaltime",
-		"playlistid",
-		"position",
-		"repeat",
-		"shuffled",
-		"canseek",
-		"canchangespeed",
-		"canmove",
-		"canzoom",
-		"canrotate",
-		"canshuffle",
-		"canrepeat",
-		"currentaudiostream",
-		"audiostreams",
-		"subtitleenabled",
-		"currentsubtitle",
-		"subtitles"
-	];
-
+	'js/services/types/player.property.name',
+], function(XbmcRpc, _, LIST_FIELDS_ALL, PLAYER_PROPERTY_NAMES) {
 	var activePlayer = {},
-		isActive     = false,
 		// list of callback functions when player state changes
 		__listeners   = [];
 
 	function updateActivePlayer() {
-		return XbmcRpc.Player.getActivePlayers().
+		return XbmcRpc.Player.GetActivePlayers().
 			then(function(players) {
 				if (players.length > 0) {
 					return players[0];
@@ -92,12 +67,12 @@ define([
 			__listeners.push(listener);
 		},
 		play : function() {
-			if (isActive && activePlayer.speed === 0) {
+			if (activePlayer.speed === 0) {
 				return XbmcRpc.Player.PlayPause(activePlayer.playerid).then(updatePlayerProperties);
 			}
 		},
 		pause : function() {
-			if (isActive && activePlayer.speed > 0) {
+			if (activePlayer.speed > 0) {
 				return XbmcRpc.Player.PlayPause(activePlayer.playerid).then(updatePlayerProperties);
 			}
 		},
@@ -146,10 +121,6 @@ define([
 			return playItem({ episodeid : episode.episodeid });
 		},
 
-		// State inspection functions
-		isActive : function() {
-			return isActive;
-		},
 		isPlaying : function() {
 			return activePlayer && activePlayer.speed === 1;
 		},

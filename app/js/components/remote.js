@@ -2,7 +2,7 @@
 
 define([
 	'components/flight/lib/component',
-	'js/services/player',
+	'js/services/Player',
 	'js/services/Input',
 	'underscore',
 	'hbs!views/subtitles',

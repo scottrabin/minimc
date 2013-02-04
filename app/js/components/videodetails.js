@@ -4,7 +4,7 @@ define(
 [
 	'components/flight/lib/component',
 	'js/services/VideoLibrary',
-	'js/services/player',
+	'js/services/Player',
 	'hbs!views/details-movie',
 	'hbs!views/details-episode',
 ],

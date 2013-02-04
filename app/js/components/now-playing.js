@@ -2,7 +2,7 @@
 
 define([
 	'components/flight/lib/component',
-	'js/services/player',
+	'js/services/Player',
 	'js/filters/formatTime',
 ], function(defineComponent, Player, formatTime) {
 

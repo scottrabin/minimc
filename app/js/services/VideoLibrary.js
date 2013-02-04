@@ -4,103 +4,16 @@ define(
 [
 	'js/services/XbmcRpc',
 	'js/filters/slug',
+	'js/services/types/video.fields.movie',
+	'js/services/types/video.fields.tvshow',
+	'js/services/types/video.fields.season',
+	'js/services/types/video.fields.episode',
 ],
-function(XbmcRpc, slugFilter) {
-
-	var VIDEO_PROPERTY_NAMES = [
-		"title",
-		"genre",
-		"year",
-		"rating",
-		"director",
-		"trailer",
-		"tagline",
-		"plot",
-		"plotoutline",
-		"originaltitle",
-		"lastplayed",
-		"playcount",
-		"writer",
-		"studio",
-		"mpaa",
-		"cast",
-		"country",
-		"imdbnumber",
-		"premiered",
-		"productioncode",
-		"runtime",
-		"set",
-		"showlink",
-		"streamdetails",
-		"top250",
-		"votes",
-		"fanart",
-		"thumbnail",
-		"file",
-		"sorttitle",
-		"resume",
-		"setid"
-	];
-	var VIDEO_FIELDS_TVSHOW = [
-		"title",
-		"genre",
-		"year",
-		"rating",
-		"plot",
-		"studio",
-		"mpaa",
-		"cast",
-		"playcount",
-		"episode",
-		"imdbnumber",
-		"premiered",
-		"votes",
-		"lastplayed",
-		"fanart",
-		"thumbnail",
-		"file",
-		"originaltitle",
-		"sorttitle",
-		"episodeguide"
-	];
-	var VIDEO_FIELDS_SEASON = [
-		"season",
-		"showtitle",
-		"playcount",
-		"episode",
-		"fanart",
-		"thumbnail",
-		"tvshowid"
-	];
-	var VIDEO_FIELDS_EPISODE = [
-		"title",
-		"plot",
-		"votes",
-		"rating",
-		"writer",
-		"firstaired",
-		"playcount",
-		"runtime",
-		"director",
-		"productioncode",
-		"season",
-		"episode",
-		"originaltitle",
-		"showtitle",
-		"cast",
-		"streamdetails",
-		"lastplayed",
-		"fanart",
-		"thumbnail",
-		"file",
-		"resume",
-		"tvshowid"
-	];
-
+function(XbmcRpc, slugFilter, VIDEO_FIELDS_MOVIE, VIDEO_FIELDS_TVSHOW, VIDEO_FIELDS_SEASON, VIDEO_FIELDS_EPISODE) {
 	var VideoLibraryService = {};
 
 	VideoLibraryService.getMovies = function() {
-		return XbmcRpc.VideoLibrary.GetMovies(VIDEO_PROPERTY_NAMES).then(function(results) {
+		return XbmcRpc.VideoLibrary.GetMovies(VIDEO_FIELDS_MOVIE).then(function(results) {
 			return results.movies;
 		});
 	};

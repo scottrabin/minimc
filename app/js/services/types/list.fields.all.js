@@ -2,6 +2,7 @@
 
 define([
 ], function() {
+	// http://wiki.xbmc.org/index.php?title=JSON-RPC_API/v6#List.Fields.All
 	return [
 		"title",
 		"artist",
@@ -51,6 +52,29 @@ define([
 		"artistid",
 		"albumid",
 		"tvshowid",
-		"setid"
+		"setid",
+		"watchedepisodes",
+		"disc",
+		"tag",
+		"art",
+		"genreid",
+		"displayartist",
+		"albumartistid",
+		"description",
+		"theme",
+		"mood",
+		"style",
+		"albumlabel",
+		"sorttitle",
+		"episodeguide",
+		"uniqueid",
+		"dateadded",
+		"channel",
+		"channeltype",
+		"hidden",
+		"locked",
+		"channelnumber",
+		"starttime",
+		"endtime"
 	];
 })
