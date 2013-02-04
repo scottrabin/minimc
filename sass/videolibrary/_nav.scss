@@ -2,12 +2,12 @@
 
 #video-library {
 	nav {
-		padding: 8px;
 		overflow: hidden;
 		a {
 			@include box-sizing(border-box);
 			float: left;
-			width: 50%;
+			width: 48%;
+			margin: 1%;
 		}
 	}
 }
