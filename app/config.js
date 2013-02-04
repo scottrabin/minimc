@@ -29,3 +29,17 @@ require.config({
 		templateExtension : "html",
 	},
 });
+require(
+[
+	'js/routes',
+	'js/components/remote',
+	'js/components/videoviewer',
+	'js/components/now-playing'
+],
+function(router, remote, videoViewer, nowPlaying) {
+	remote.attachTo('#remote');
+	videoViewer.attachTo('#video-library');
+	nowPlaying.attachTo('#now-playing');
+
+	$(window).trigger('hashchange');
+});
