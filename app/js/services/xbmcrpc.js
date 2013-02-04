@@ -63,6 +63,15 @@ function(Ajax) {
 				return sendCommand('Input.Right', null);
 			},
 			/**
+			 * 5.4.6 Input.Select - Select current item in GUI
+			 * http://TODO
+			 *
+			 * @returns {RpcPromise}
+			 */
+			Select : function() {
+				return sendCommand('Input.Select', null);
+			},
+			/**
 			 * 5.4.7 Input.Up - Navigate up in GUI
 			 * http://TODO
 			 *

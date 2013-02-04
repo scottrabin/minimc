@@ -23,6 +23,7 @@ define([
 			"selectorArrowDown" : "#remote-navigation .arrow.down",
 			"selectorArrowLeft" : "#remote-navigation .arrow.left",
 			"selectorArrowRight" : "#remote-navigation .arrow.right",
+			"selectorGuiSelect" : "#remote-navigation .enter",
 		});
 
 		this.rewind = function() {
@@ -41,7 +42,9 @@ define([
 
 		this.move = function(event) {
 			Input.move( REGEX_ARROW_DIRECTION.exec($(event.target).attr('class'))[1] );
-		}
+		};
+
+		this.guiSelect = Input.select;
 
 		this.updateControl = function(event, speed) {
 			this.select('selectorPlayPause').
@@ -102,6 +105,7 @@ define([
 				"selectorArrowDown" : this.move,
 				"selectorArrowLeft" : this.move,
 				"selectorArrowRight" : this.move,
+				"selectorGuiSelect" : this.guiSelect,
 			});
 
 			this.on(document, 'playerSpeedChanged', this.updateControl);

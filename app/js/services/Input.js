@@ -19,5 +19,9 @@ function(XbmcRpc) {
 		return XbmcRpc.Input[ DIRECTION_COMMAND_MAP[direction] ]();
 	};
 
+	InputService.select = function() {
+		return XbmcRpc.Input.Select();
+	};
+
 	return InputService;
 });
