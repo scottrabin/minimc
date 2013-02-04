@@ -8,10 +8,9 @@
 	top: 0;
 	left: 0;
 	right: 0;
-	height: 80px;
-	min-height: 80px;
+	height: 113px;
+	min-height: 113px;
 	text-align: center;
-	padding: 8px;
 	overflow: hidden;
 
 	z-index: 1000;
@@ -23,7 +22,7 @@
 	}
 
 	#playback-controls {
-		margin-bottom: 20px;
+		margin: 8px 0;
 
 		.button {
 			padding: 0;
