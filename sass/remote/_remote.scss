@@ -8,8 +8,8 @@
 	top: 0;
 	left: 0;
 	right: 0;
-	height: 76px;
-	min-height: 76px;
+	height: 80px;
+	min-height: 80px;
 	text-align: center;
 	padding: 8px;
 	overflow: hidden;
@@ -37,17 +37,33 @@
 		}
 	}
 
+	.grip-bar {
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		height: 11px;
+		background: #444;
+		z-index: 1000;
+		@include border-radius(0 0 5px 5px);
+	}
 	#grippy-grip {
 		position: absolute;
-		height: 15px;
+		height: 7px;
 		width: 16px;
 		margin-left: -8px;
 		left: 50%;
 		bottom: 0;
 		border-style: solid;
-		border-color: white;
+		border-color: #aaa;
 		border-width: 1px 0 1px;
-		background-color: green;
+		@include border-radius(2px);
+		&::before {
+			content: "\23BC";
+			vertical-align: top;
+			line-height: 7px;
+			color: #aaa;
+		}
 	}
 
 	.arrow {
