@@ -6,10 +6,11 @@ define(
 	'js/services/VideoLibrary',
 	'when',
 	'underscore',
+	'js/utility/showLoading',
 	'hbs!views/episodes/seasons',
 	'hbs!views/episodes/episodes',
 ],
-function(defineComponent, VideoLibrary, when, _, seasonTemplate, episodeTemplate) {
+function(defineComponent, VideoLibrary, when, _, showLoading, seasonTemplate, episodeTemplate) {
 
 	return defineComponent(episodeViewer);
 
@@ -32,6 +33,7 @@ function(defineComponent, VideoLibrary, when, _, seasonTemplate, episodeTemplate
 
 				// if the title slug doesn't match, re-render the season selector
 				if (currentShow !== data.title_slug) {
+					showLoading(this.select('selectorSeasonList'));
 					showCache[data.title_slug].
 						then(VideoLibrary.getShowSeasons).
 						then(function(seasons) {
@@ -43,6 +45,7 @@ function(defineComponent, VideoLibrary, when, _, seasonTemplate, episodeTemplate
 				}
 				// if the title slug doesn't match or the requested season has changed, re-render the episode selector
 				if (currentShow !== data.title_slug || data.season !== currentSeason) {
+					showLoading(this.select('selectorEpisodeList'));
 					showCache[data.title_slug].
 						then(VideoLibrary.getEpisodes).
 						then(function(episodes) {

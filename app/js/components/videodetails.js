@@ -5,10 +5,11 @@ define(
 	'components/flight/lib/component',
 	'js/services/VideoLibrary',
 	'js/services/Player',
+	'js/utility/showLoading',
 	'hbs!views/details-movie',
 	'hbs!views/details-episode',
 ],
-function(defineComponent, VideoLibrary, Player, movieDetails, episodeDetails) {
+function(defineComponent, VideoLibrary, Player, showLoading, movieDetails, episodeDetails) {
 
 	return defineComponent(videoViewer);
 
@@ -28,6 +29,7 @@ function(defineComponent, VideoLibrary, Player, movieDetails, episodeDetails) {
 
 		this.showEpisodeDetails = function(event, showData) {
 			var self = this;
+			showLoading(this.$node);
 			VideoLibrary.getShowFromSlug(showData.title_slug).
 				then(function(show) {
 					return VideoLibrary.getEpisodeBySeasonEpisode(show, showData.season, showData.episode);
@@ -43,6 +45,7 @@ function(defineComponent, VideoLibrary, Player, movieDetails, episodeDetails) {
 
 		this.showMovieDetails = function(event, movieData) {
 			var self = this;
+			showLoading(this.$node);
 			VideoLibrary.getMovieFromSlug(movieData.title_slug).
 				then(function(movie) {
 					self.$node.
