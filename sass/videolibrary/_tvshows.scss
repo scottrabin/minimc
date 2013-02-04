@@ -73,6 +73,9 @@
 		img {
 			float: left;
 			height: 100%;
+			// slight visual distortion is better than the visible misalignment
+			// that is seen without enforcing a width
+			width: 100px;
 			vertical-align: middle;
 		}
 
