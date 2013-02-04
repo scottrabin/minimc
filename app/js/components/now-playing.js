@@ -34,6 +34,7 @@ define([
 
 			// trigger some specific global events
 			$(document).trigger('playerSpeedChanged', playerState.speed);
+			$(document).trigger('playerSubtitlesChanged', [playerState.subtitles]);
 		}
 
 		this.updatePlayTime = function(playerState) {

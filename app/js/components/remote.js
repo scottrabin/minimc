@@ -4,7 +4,9 @@ define([
 	'components/flight/lib/component',
 	'js/services/player',
 	'js/services/Input',
-], function(defineComponent, Player, Input) {
+	'underscore',
+	'hbs!views/subtitles',
+], function(defineComponent, Player, Input, _, subtitleTemplate) {
 
 	var DRAG_THRESHOLD = 50;
 	var REGEX_ARROW_DIRECTION = /(up|down|left|right)/;
@@ -24,6 +26,8 @@ define([
 			"selectorArrowLeft" : "#remote-navigation .arrow.left",
 			"selectorArrowRight" : "#remote-navigation .arrow.right",
 			"selectorGuiSelect" : "#remote-navigation .enter",
+			"selectorSubtitles" : "#playback-subtitles",
+			"selectorSubtitleButton" : "#playback-subtitles button",
 		});
 
 		this.rewind = function() {
@@ -51,6 +55,37 @@ define([
 				toggleClass('icon-play', speed !== 1).
 				toggleClass('icon-pause', speed === 1);
 		}
+
+		this.updateSubtitles = function(event, subtitles) {
+			var currentSubtitle = (Player.areSubtitlesEnabled() ? Player.getCurrentSubtitle().index : null);
+			if (!_.isEqual(this.select('selectorSubtitles').data('source'), subtitles)) {
+				this.select('selectorSubtitles').
+					data('source', subtitles).
+					html( subtitleTemplate({
+						currentSubtitle : currentSubtitle,
+						subtitles : subtitles
+					}) );
+			}
+			this.select('selectorSubtitleButton').removeClass('active').
+				filter('[data-index=' + currentSubtitle + ']').addClass('active');
+		};
+
+		this.activateSubtitle = function(event) {
+			var $target = $(event.target),
+				index   = $target.attr('data-index');
+
+			if ($target.hasClass('active')) {
+				// do nothing if it's already active
+				return;
+			}
+			Player.setSubtitle(
+				index === 'null' ? null :
+				_.findWhere(
+					this.select('selectorSubtitles').data('source'),
+					{ index : parseInt(index, 10) }
+				)
+			);
+		};
 
 		this.startDrag = function(event) {
 			event.preventDefault();
@@ -106,9 +141,11 @@ define([
 				"selectorArrowLeft" : this.move,
 				"selectorArrowRight" : this.move,
 				"selectorGuiSelect" : this.guiSelect,
+				"selectorSubtitleButton" : this.activateSubtitle,
 			});
 
 			this.on(document, 'playerSpeedChanged', this.updateControl);
+			this.on(document, 'playerSubtitlesChanged', this.updateSubtitles);
 
 			this.on('mousedown', {
 				"selectorGrip" : this.startDrag,
