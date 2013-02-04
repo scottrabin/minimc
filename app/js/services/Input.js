@@ -25,6 +25,7 @@ function(XbmcRpc) {
 
 	InputService.home = XbmcRpc.Input.Home;
 	InputService.back = XbmcRpc.Input.Back;
+	InputService.menu = XbmcRpc.Input.ShowOSD;
 
 	return InputService;
 });

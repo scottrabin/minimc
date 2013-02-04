@@ -45,6 +45,14 @@ function(Ajax) {
 				return sendCommand('Input.Back', null);
 			},
 			/**
+			 * 5.6.2 Input.ContextMenu - Shows the context menu
+			 *
+			 * @returns {RpcPromise}
+			 */
+			ContextMenu : function() {
+				return sendCommand('Input.ContextMenu', null);
+			},
+			/**
 			 * 5.6.3 Input.Down - Navigate down in GUI
 			 * http://wiki.xbmc.org/index.php?title=JSON-RPC_API/v6#Input.Down
 			 *
@@ -52,6 +60,18 @@ function(Ajax) {
 			 */
 			Down : function() {
 				return sendCommand('Input.Down', null);
+			},
+			/**
+			 * 5.6.4 Input.ExecuteAction - Execute a specific action
+			 * http://wiki.xbmc.org/index.php?title=JSON-RPC_API/v6#Input.ExecuteAction
+			 *
+			 * @param {Input.Action} action
+			 * @returns {RpcPromise}
+			 */
+			ExecuteAction : function(action) {
+				return sendCommand('Input.ExecuteAction', {
+					"action" : action,
+				});
 			},
 			/**
 			 * 5.6.5 Input.Home - Goes to home window in GUI
@@ -88,6 +108,15 @@ function(Ajax) {
 			 */
 			Select : function() {
 				return sendCommand('Input.Select', null);
+			},
+			/**
+			 * 5.6.12 Input.ShowOSD - Show the on-screen display for the current player
+			 * http://wiki.xbmc.org/index.php?title=JSON-RPC_API/v6#Input.ShowOSD
+			 *
+			 * @returns {RpcPromise}
+			 */
+			ShowOSD : function() {
+				return sendCommand('Input.ShowOSD', null);
 			},
 			/**
 			 * 5.6.13 Input.Up - Navigate up in GUI

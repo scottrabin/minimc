@@ -28,6 +28,7 @@ define([
 			"selectorGuiSelect" : "#remote-navigation .enter",
 			"selectorSubtitles" : "#playback-subtitles",
 			"selectorSubtitleButton" : "#playback-subtitles button",
+			"selectorMenuButton" : ".button.menu",
 			"selectorHomeButton" : ".button.home",
 			"selectorBackButton" : ".button.back",
 		});
@@ -144,6 +145,7 @@ define([
 				"selectorArrowRight" : this.move,
 				"selectorGuiSelect" : this.guiSelect,
 				"selectorSubtitleButton" : this.activateSubtitle,
+				"selectorMenuButton" : Input.menu,
 				"selectorHomeButton" : Input.home,
 				"selectorBackButton" : Input.back,
 			});
