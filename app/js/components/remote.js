@@ -28,9 +28,9 @@ define([
 			"selectorGuiSelect" : "#remote-navigation .enter",
 			"selectorSubtitles" : "#playback-subtitles",
 			"selectorSubtitleButton" : "#playback-subtitles button",
-			"selectorMenuButton" : ".button.menu",
-			"selectorHomeButton" : ".button.home",
-			"selectorBackButton" : ".button.back",
+			"selectorMenuButton" : "button.menu",
+			"selectorHomeButton" : "button.home",
+			"selectorBackButton" : "button.back",
 		});
 
 		this.rewind = function() {
