@@ -4,16 +4,16 @@ define(
 [
 	'components/flight/lib/component',
 	'js/mixins/main-view',
+	'js/mixins/promiseContent',
 	'js/services/VideoLibrary',
 	'when',
 	'underscore',
-	'js/utility/showLoading',
 	'hbs!views/episodes/seasons',
 	'hbs!views/episodes/episodes',
 ],
-function(defineComponent, mainView, VideoLibrary, when, _, showLoading, seasonTemplate, episodeTemplate) {
+function(defineComponent, mainView, promiseContent, VideoLibrary, when, _, seasonTemplate, episodeTemplate) {
 
-	return defineComponent(episodeViewer, mainView);
+	return defineComponent(episodeViewer, mainView, promiseContent);
 
 	function episodeViewer() {
 		var showCache = {};
@@ -32,26 +32,32 @@ function(defineComponent, mainView, VideoLibrary, when, _, showLoading, seasonTe
 
 			// if the title slug doesn't match, re-render the season selector
 			if (currentShow !== data.title_slug) {
-				showLoading(this.select('selectorSeasonList'));
-				showCache[data.title_slug].
-					then(VideoLibrary.getShowSeasons).
-					then(function(seasons) {
-					self.select('selectorSeasonList').html( seasonTemplate({
-						seasons       : seasons,
-						currentSeason : currentSeason,
-					}) );
-				});
+				this.setContent(
+					'selectorSeasonList',
+					seasonTemplate,
+					showCache[data.title_slug].
+						then(VideoLibrary.getShowSeasons).
+						then(function(seasons) {
+							return {
+								"seasons"       : seasons,
+								"currentSeason" : currentSeason,
+							};
+						})
+				);
 			}
 			// if the title slug doesn't match or the requested season has changed, re-render the episode selector
 			if (currentShow !== data.title_slug || data.season !== currentSeason) {
-				showLoading(this.select('selectorEpisodeList'));
-				showCache[data.title_slug].
-					then(VideoLibrary.getEpisodes).
-					then(function(episodes) {
-					self.select('selectorEpisodeList').html( episodeTemplate({
-						episodes : _.where(episodes, {season : currentSeason}),
-					}) );
-				});
+				this.setContent(
+					'selectorEpisodeList',
+					episodeTemplate,
+					showCache[data.title_slug].
+						then(VideoLibrary.getEpisodes).
+						then(function(episodes) {
+							return {
+								"episodes" : _.where(episodes, { season : currentSeason }),
+							};
+						})
+				);
 			}
 
 			currentShow = data.title_slug;

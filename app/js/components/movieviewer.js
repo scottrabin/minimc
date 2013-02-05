@@ -5,19 +5,26 @@ define(
 	'components/flight/lib/component',
 	'js/services/VideoLibrary',
 	'js/mixins/main-view',
+	'js/mixins/promiseContent',
 	'hbs!views/movies',
 ],
-function(defineComponent, VideoLibrary, mainView, movieTemplate) {
+function(defineComponent, VideoLibrary, mainView, promiseContent, movieTemplate) {
 
-	return defineComponent(movieViewer, mainView);
+	return defineComponent(movieViewer, mainView, promiseContent);
 
 	function movieViewer() {
 
 		this.after('initialize', function() {
-			var self = this;
-			VideoLibrary.getMovies().then(function(movies) {
-				self.node.innerHTML = movieTemplate({ movies : movies });
-			});
+			this.setContent(
+				this.$node,
+				movieTemplate,
+				VideoLibrary.getMovies().
+					then(function(movies) {
+						return {
+							"movies" : movies,
+						};
+					})
+			);
 
 			this.activateOn(document, 'viewMovies');
 		});

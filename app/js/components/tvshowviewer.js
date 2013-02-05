@@ -5,19 +5,26 @@ define(
 	'components/flight/lib/component',
 	'js/services/VideoLibrary',
 	'js/mixins/main-view',
+	'js/mixins/promiseContent',
 	'hbs!views/tv-shows',
 ],
-function(defineComponent, VideoLibrary, mainView, tvShowTemplate) {
+function(defineComponent, VideoLibrary, mainView, promiseContent, tvShowTemplate) {
 
-	return defineComponent(tvShowViewer, mainView);
+	return defineComponent(tvShowViewer, mainView, promiseContent);
 
 	function tvShowViewer() {
 
 		this.after('initialize', function() {
-			var self = this;
-			VideoLibrary.getShows().then(function(tv_shows) {
-				self.node.innerHTML = tvShowTemplate({ tv_shows : tv_shows });
-			});
+			this.setContent(
+				this.$node,
+				tvShowTemplate,
+				VideoLibrary.getShows().
+					then(function(tvShows) {
+						return {
+							"tv_shows" : tvShows,
+						};
+					})
+			);
 
 			this.activateOn(document, 'viewTVShows');
 		});

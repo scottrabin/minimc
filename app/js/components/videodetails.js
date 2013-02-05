@@ -4,15 +4,15 @@ define(
 [
 	'components/flight/lib/component',
 	'js/mixins/main-view',
+	'js/mixins/promiseContent',
 	'js/services/VideoLibrary',
 	'js/services/Player',
-	'js/utility/showLoading',
 	'hbs!views/details-movie',
 	'hbs!views/details-episode',
 ],
-function(defineComponent, mainView, VideoLibrary, Player, showLoading, movieDetails, episodeDetails) {
+function(defineComponent, mainView, promiseContent, VideoLibrary, Player, movieDetails, episodeDetails) {
 
-	return defineComponent(videoViewer, mainView);
+	return defineComponent(videoViewer, mainView, promiseContent);
 
 	function videoViewer() {
 
@@ -21,32 +21,28 @@ function(defineComponent, mainView, VideoLibrary, Player, showLoading, movieDeta
 		});
 
 		this.showEpisodeDetails = function(event, showData) {
-			var self = this;
-			showLoading(this.$node);
-			VideoLibrary.getShowFromSlug(showData.title_slug).
-				then(function(show) {
-					return VideoLibrary.getEpisodeBySeasonEpisode(show, showData.season, showData.episode);
-				}).
-				then(function(episode) {
-					self.$node.
-						removeClass('movie').
-						addClass('episode').
-						data( 'source', episode ).
-						html( episodeDetails(episode) );
-				});
+			this.setContent(
+				this.$node,
+				episodeDetails,
+				VideoLibrary.getShowFromSlug(showData.title_slug).
+					then(function(show) {
+						return VideoLibrary.getEpisodeBySeasonEpisode(show, showData.season, showData.episode);
+					})
+			).then(function(contentData) {
+				var node = contentData[0], episode = contentData[1];
+				node.removeClass('movie').addClass('episode').data('source', episode);
+			});
 		};
 
 		this.showMovieDetails = function(event, movieData) {
-			var self = this;
-			showLoading(this.$node);
-			VideoLibrary.getMovieFromSlug(movieData.title_slug).
-				then(function(movie) {
-					self.$node.
-						removeClass('episode').
-						addClass('movie').
-						data( 'source', movie ).
-						html( movieDetails(movie) );
-				});
+			this.setContent(
+				this.$node,
+				movieDetails,
+				VideoLibrary.getMovieFromSlug(movieData.title_slug)
+			).then(function(contentData) {
+				var node = contentData[0], movie = contentData[1];
+				node.removeClass('episode').addClass('movie').data('source', movie);
+			});
 		};
 
 		this.playVideo = function(event) {
