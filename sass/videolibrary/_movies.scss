@@ -10,15 +10,15 @@
 
 		a {
 			@include inline-block;
-			width: 120px;
-			height: 250px;
+			width: 170px;
+			height: 295px;
 			padding: 6px;
 			text-align: center;
 		}
 
 		img {
 			max-width: 100%;
-			max-height: 180px;
+			max-height: 255px;
 			display: block;
 			margin: 0 auto 5px;
 		}
