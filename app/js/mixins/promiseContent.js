@@ -1,7 +1,9 @@
 'use strict';
 
-define([
-], function() {
+define(
+[
+	'js/spinner',
+], function(spinner) {
 
 	return promiseContent;
 
@@ -22,10 +24,18 @@ define([
 		 *											and the data used to generate the content
 		 */
 		this.setContent = function(selector, template, promise) {
+			// get the correct node
 			var node = (typeof selector === 'string' ? this.select(selector) : selector);
-			return promise.then(function(templateData) {
-				return [node.html( template(templateData) ), templateData];
-			});
+
+			// blank the content
+			node.empty();
+
+			return spinner.show(
+				promise.then(function(templateData) {
+					// return the appropriate data
+					return [node.html( template(templateData) ), templateData];
+				})
+			);
 		};
 	}
 });
