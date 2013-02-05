@@ -2,15 +2,6 @@
   "name": "wexbmc",
   "version": "0.0.0",
   "description": "A web interface to control XBMC",
-  "directories": {
-    "test": "test"
-  },
-  "scripts": {
-    "test": "testacular start test/config/testacular.conf.js"
-  },
-  "author": "Scott Rabin",
-  "license": "MIT",
-  "devDependencies": {
-    "grunt": "~0.3.17"
-  }
+  "author": "Scott Rabin <scottrabin@gmail.com>",
+  "license": "MIT"
 }
