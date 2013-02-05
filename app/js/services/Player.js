@@ -62,7 +62,8 @@ define([
 	}
 
 	function playItem(item) {
-		return XbmcRpc.Player.Open( { item : item } );
+		return XbmcRpc.Player.Open( { item : item } ).
+			then(updateActivePlayer);
 	}
 
 	return {
