@@ -52,9 +52,6 @@ function(defineComponent, mainView, promiseContent, VideoLibrary, Player, movieD
 		}
 
 		this.after('initialize', function() {
-			this.on('show', this.show);
-			this.on('hide', this.hide);
-
 			this.on('click', {
 				'selectorVideoImage': this.playVideo,
 			});

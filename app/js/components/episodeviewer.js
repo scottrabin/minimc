@@ -69,7 +69,7 @@ function(defineComponent, mainView, promiseContent, VideoLibrary, when, _, seaso
 		};
 
 		this.after('initialize', function() {
-
+			this.on('show', this.show);
 			this.activateOn(document, 'viewEpisodes');
 		});
 	}

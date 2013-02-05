@@ -28,6 +28,13 @@ define([
 		function triggerHide() { this.trigger('hide'); };
 
 		/**
+		 * Show/hide functions
+		 * @private
+		 */
+		function show() { this.$node.show(); };
+		function hide() { this.$node.hide(); };
+
+		/**
 		 * Switch the active view to the given component
 		 * @private
 		 */
@@ -53,30 +60,12 @@ define([
 		};
 
 		/**
-		 * Default show function
-		 */
-		if (!this.show) {
-			this.show = function() {
-				this.$node.show();
-			};
-		}
-
-		/**
-		 * Default hide function
-		 */
-		if (!this.hide) {
-			this.hide = function() {
-				this.$node.hide();
-			};
-		}
-
-		/**
 		 * Register the hide event for this component
 		 */
 		this.after('initialize', function() {
 			this.on(document, EVENT_MAIN_VIEW_HIDE_OTHERS, triggerHide);
-			this.on('show', this.show);
-			this.on('hide', this.hide);
+			this.on('show', show);
+			this.on('hide', hide);
 		});
 	}
 
