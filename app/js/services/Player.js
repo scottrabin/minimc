@@ -7,6 +7,7 @@ define([
 	'js/services/types/player.property.name',
 ], function(XbmcRpc, _, LIST_FIELDS_ALL, PLAYER_PROPERTY_NAMES) {
 	var activePlayer = {},
+		hasChanged = false,
 		// list of callback functions when player state changes
 		__listeners   = [];
 
@@ -19,35 +20,39 @@ define([
 					throw new Error("No active players")
 				}
 			}).
-			then(updatePlayerProperties).
+			then(updatePlayerProperties, deactivatePlayer).
 			then(function(activePlayer) {
 				return XbmcRpc.Player.GetProperties(activePlayer.playerid, PLAYER_PROPERTY_NAMES).then(updatePlayerProperties);
 			}).
 			then(function(activePlayer) {
 				return XbmcRpc.Player.GetItem(activePlayer.playerid, LIST_FIELDS_ALL).then(updateCurrentlyPlaying);
-			});
+			}).
+			always(notify);
 	};
 
 	function deactivatePlayer() {
 		_.each(activePlayer, function(v, k) {
 			delete activePlayer[k];
 		});
+		hasChanged = true;
 		return activePlayer;
 	}
 
-	function updatePlayerProperties(properties) {
-		var hasChanged = false;
-
-		_.each(properties, function(newValue, prop) {
-			hasChanged = (hasChanged || !_.isEqual(activePlayer[prop], newValue));
-			activePlayer[prop] = newValue;
-		});
-
+	function notify() {
 		if (hasChanged) {
 			_.each(__listeners, function(fn) {
 				fn(activePlayer);
 			});
+			hasChanged = false;
 		}
+		return activePlayer;
+	}
+
+	function updatePlayerProperties(properties) {
+		_.each(properties, function(newValue, prop) {
+			hasChanged = (hasChanged || !_.isEqual(activePlayer[prop], newValue));
+			activePlayer[prop] = newValue;
+		});
 
 		return activePlayer;
 	}
