@@ -4,11 +4,12 @@ define(
 [
 	'components/flight/lib/component',
 	'js/services/VideoLibrary',
+	'js/mixins/main-view',
 	'hbs!views/tv-shows',
 ],
-function(defineComponent, VideoLibrary, tvShowTemplate) {
+function(defineComponent, VideoLibrary, mainView, tvShowTemplate) {
 
-	return defineComponent(tvShowViewer);
+	return defineComponent(tvShowViewer, mainView);
 
 	function tvShowViewer() {
 
@@ -18,12 +19,7 @@ function(defineComponent, VideoLibrary, tvShowTemplate) {
 				self.node.innerHTML = tvShowTemplate({ tv_shows : tv_shows });
 			});
 
-			this.on('show', function() {
-				this.$node.show();
-			});
-			this.on('hide', function() {
-				this.$node.hide();
-			});
+			this.activateOn(document, 'viewTVShows');
 		});
 	}
 });

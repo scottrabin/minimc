@@ -4,11 +4,12 @@ define(
 [
 	'components/flight/lib/component',
 	'js/services/VideoLibrary',
+	'js/mixins/main-view',
 	'hbs!views/movies',
 ],
-function(defineComponent, VideoLibrary, movieTemplate) {
+function(defineComponent, VideoLibrary, mainView, movieTemplate) {
 
-	return defineComponent(movieViewer);
+	return defineComponent(movieViewer, mainView);
 
 	function movieViewer() {
 
@@ -18,12 +19,7 @@ function(defineComponent, VideoLibrary, movieTemplate) {
 				self.node.innerHTML = movieTemplate({ movies : movies });
 			});
 
-			this.on('show', function() {
-				this.$node.show();
-			});
-			this.on('hide', function() {
-				this.$node.hide();
-			});
+			this.activateOn(document, 'viewMovies');
 		});
 	}
 });

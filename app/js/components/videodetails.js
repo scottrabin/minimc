@@ -3,29 +3,22 @@
 define(
 [
 	'components/flight/lib/component',
+	'js/mixins/main-view',
 	'js/services/VideoLibrary',
 	'js/services/Player',
 	'js/utility/showLoading',
 	'hbs!views/details-movie',
 	'hbs!views/details-episode',
 ],
-function(defineComponent, VideoLibrary, Player, showLoading, movieDetails, episodeDetails) {
+function(defineComponent, mainView, VideoLibrary, Player, showLoading, movieDetails, episodeDetails) {
 
-	return defineComponent(videoViewer);
+	return defineComponent(videoViewer, mainView);
 
 	function videoViewer() {
 
 		this.defaultAttrs({
 			"selectorVideoImage" : ".video-image",
 		});
-
-		this.show = function(event, showData) {
-			this.$node.show();
-		};
-
-		this.hide = function() {
-			this.$node.hide();
-		}
 
 		this.showEpisodeDetails = function(event, showData) {
 			var self = this;
@@ -72,6 +65,7 @@ function(defineComponent, VideoLibrary, Player, showLoading, movieDetails, episo
 
 			this.on(document, 'viewEpisodeDetails', this.showEpisodeDetails);
 			this.on(document, 'viewMovieDetails', this.showMovieDetails);
+			this.activateOn(document, 'viewEpisodeDetails viewMovieDetails');
 		});
 	}
 

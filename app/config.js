@@ -33,13 +33,19 @@ require(
 [
 	'js/routes',
 	'js/components/remote',
-	'js/components/videoviewer',
-	'js/components/now-playing'
+	'js/components/now-playing',
+	'js/components/movieviewer',
+	'js/components/tvshowviewer',
+	'js/components/episodeviewer',
+	'js/components/videodetails',
 ],
-function(router, remote, videoViewer, nowPlaying) {
+function(router, remote, nowPlaying, movieViewer, tvShowViewer, episodeViewer, detailsViewer) {
 	remote.attachTo('#remote');
-	videoViewer.attachTo('#video-library');
 	nowPlaying.attachTo('#now-playing');
+	movieViewer.attachTo('#movies');
+	tvShowViewer.attachTo("#tv-shows");
+	episodeViewer.attachTo("#episodes");
+	detailsViewer.attachTo("#video-details");
 
 	$(window).trigger('hashchange');
 });
