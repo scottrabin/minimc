@@ -16,8 +16,8 @@ function(defineComponent, mainView, promiseContent, VideoLibrary, when, _, seaso
 	return defineComponent(episodeViewer, mainView, promiseContent);
 
 	function episodeViewer() {
-		var showCache = {};
-		var currentShow, currentSeason = 1;
+		var currentShow, currentSeason,
+			seasons, episodes;
 
 		this.defaultAttrs({
 			"selectorSeasonList" : ".season-selector",
@@ -25,44 +25,37 @@ function(defineComponent, mainView, promiseContent, VideoLibrary, when, _, seaso
 		});
 
 		this.show = function(event, data) {
-			var self = this;
-			if (!showCache[data.title_slug]) {
-				showCache[data.title_slug] = VideoLibrary.getShowFromSlug(data.title_slug);
-			}
-
-			// if the title slug doesn't match, re-render the season selector
+			// if the title slug doesn't match, reset the season and episode data
 			if (currentShow !== data.title_slug) {
+				var show = VideoLibrary.getShowFromSlug(data.title_slug);
+				seasons  = show.then(VideoLibrary.getShowSeasons);
+				episodes = show.then(VideoLibrary.getEpisodes);
+				currentShow   = data.title_slug;
+				currentSeason = null;
+
 				this.setContent(
 					'selectorSeasonList',
 					seasonTemplate,
-					showCache[data.title_slug].
-						then(VideoLibrary.getShowSeasons).
-						then(function(seasons) {
-							return {
-								"seasons"       : seasons,
-								"currentSeason" : currentSeason,
-							};
-						})
+					seasons.then(function(seasons) {
+						return {
+							"seasons"       : seasons,
+							"currentSeason" : currentSeason,
+						};
+					})
 				);
 			}
 			// if the title slug doesn't match or the requested season has changed, re-render the episode selector
-			if (currentShow !== data.title_slug || data.season !== currentSeason) {
+			if (data.season !== currentSeason) {
+				currentSeason = data.season || 1;
 				this.setContent(
 					'selectorEpisodeList',
 					episodeTemplate,
-					showCache[data.title_slug].
-						then(VideoLibrary.getEpisodes).
-						then(function(episodes) {
-							return {
-								"episodes" : _.where(episodes, { season : currentSeason }),
-							};
-						})
+					episodes.then(function(episodes) {
+						return {
+							"episodes" : _.where(episodes, { season : currentSeason }),
+						};
+					})
 				);
-			}
-
-			currentShow = data.title_slug;
-			if (data.season) {
-				currentSeason = data.season;
 			}
 
 			this.$node.show();
