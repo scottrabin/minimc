@@ -39,7 +39,7 @@ define([
 		return fetchActivePlayer().
 			then(fetchPlayerProperties).
 			then(fetchPlayerCurrentItem).
-			otherwise(deactivatePlayer)
+			otherwise(deactivatePlayer).
 			always(notify);
 	};
 
@@ -66,6 +66,12 @@ define([
 		return activePlayer;
 	}
 
+	function syncProperties(properties) {
+		updatePlayerProperties(properties);
+		notify();
+		return activePlayer;
+	}
+
 	function deactivatePlayer() {
 		activePlayer = {};
 		hasChanged = true;
@@ -85,22 +91,22 @@ define([
 		},
 		play : function() {
 			if (activePlayer.speed === 0) {
-				return XbmcRpc.Player.PlayPause(activePlayer.playerid).then(updatePlayerProperties);
+				return XbmcRpc.Player.PlayPause(activePlayer.playerid).then(syncProperties);
 			}
 		},
 		pause : function() {
 			if (activePlayer.speed > 0) {
-				return XbmcRpc.Player.PlayPause(activePlayer.playerid).then(updatePlayerProperties);
+				return XbmcRpc.Player.PlayPause(activePlayer.playerid).then(syncProperties);
 			}
 		},
 		stop : function() {
-			return XbmcRpc.Player.Stop(activePlayer.playerid);
+			return XbmcRpc.Player.Stop(activePlayer.playerid).then(updateActivePlayer);
 		},
 		togglePlaying : function() {
-			return XbmcRpc.Player.PlayPause(activePlayer.playerid).then(updatePlayerProperties);
+			return XbmcRpc.Player.PlayPause(activePlayer.playerid).then(syncProperties);
 		},
 		setSpeed : function(speed) {
-			return XbmcRpc.Player.SetSpeed(activePlayer.playerid, speed).then(updatePlayerProperties);
+			return XbmcRpc.Player.SetSpeed(activePlayer.playerid, speed).then(syncProperties);
 		},
 
 		/**
@@ -122,7 +128,7 @@ define([
 				   ).then(updateActivePlayer);
 		},
 		areSubtitlesEnabled : function() {
-			return activePlayer && activePlayer.subtitleenabled;
+			return activePlayer.subtitleenabled;
 		},
 
 		/**
