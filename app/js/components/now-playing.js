@@ -7,9 +7,6 @@ define([
 	'js/filters/itemLink',
 ], function(defineComponent, Player, formatTime, itemLink) {
 
-	// the Now Playing component should manage most of the player state
-	setInterval(Player.update, 5000);
-
 	return defineComponent(nowPlaying);
 
 	function nowPlaying() {

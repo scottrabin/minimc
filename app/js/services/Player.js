@@ -6,12 +6,14 @@ define([
 	'js/services/types/list.fields.all',
 	'js/services/types/player.property.name',
 ], function(XbmcRpc, _, LIST_FIELDS_ALL, PLAYER_PROPERTY_NAMES) {
-	var activePlayer = {},
-		hasChanged = false,
+	var activePlayer  = {},
+		hasChanged    = false,
 		// list of callback functions when player state changes
 		__listeners   = [];
 
-	function updateActivePlayer() {
+	setInterval(updateActivePlayer, 5000);
+
+	function fetchActivePlayer() {
 		return XbmcRpc.Player.GetActivePlayers().
 			then(function(players) {
 				if (players.length > 0) {
@@ -20,22 +22,29 @@ define([
 					throw new Error("No active players")
 				}
 			}).
-			then(updatePlayerProperties, deactivatePlayer).
-			then(function(activePlayer) {
-				return XbmcRpc.Player.GetProperties(activePlayer.playerid, PLAYER_PROPERTY_NAMES).then(updatePlayerProperties);
-			}).
-			then(function(activePlayer) {
-				return XbmcRpc.Player.GetItem(activePlayer.playerid, LIST_FIELDS_ALL).then(updateCurrentlyPlaying);
-			}).
+			then(updatePlayerProperties);
+	}
+
+	function fetchPlayerProperties(player) {
+		return XbmcRpc.Player.GetProperties(player.playerid, PLAYER_PROPERTY_NAMES).
+			then(updatePlayerProperties);
+	}
+
+	function fetchPlayerCurrentItem(player) {
+		return XbmcRpc.Player.GetItem(player.playerid, LIST_FIELDS_ALL).
+			then(updateCurrentlyPlaying);
+	}
+
+	function updateActivePlayer() {
+		return fetchActivePlayer().
+			then(fetchPlayerProperties).
+			then(fetchPlayerCurrentItem).
+			otherwise(deactivatePlayer)
 			always(notify);
 	};
 
-	function deactivatePlayer() {
-		_.each(activePlayer, function(v, k) {
-			delete activePlayer[k];
-		});
-		hasChanged = true;
-		return activePlayer;
+	function updateCurrentlyPlaying(result) {
+		return updatePlayerProperties( { currentitem : result && result.item } );
 	}
 
 	function notify() {
@@ -57,8 +66,10 @@ define([
 		return activePlayer;
 	}
 
-	function updateCurrentlyPlaying(result) {
-		return updatePlayerProperties( { currentitem : result.item } );
+	function deactivatePlayer() {
+		activePlayer = {};
+		hasChanged = true;
+		return activePlayer;
 	}
 
 	function playItem(item) {
@@ -128,7 +139,7 @@ define([
 		},
 
 		isPlaying : function() {
-			return activePlayer && activePlayer.speed === 1;
+			return activePlayer.speed === 1;
 		},
 	}
 });
