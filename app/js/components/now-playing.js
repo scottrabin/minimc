@@ -4,7 +4,8 @@ define([
 	'components/flight/lib/component',
 	'js/services/Player',
 	'js/filters/formatTime',
-], function(defineComponent, Player, formatTime) {
+	'js/filters/itemLink',
+], function(defineComponent, Player, formatTime, itemLink) {
 
 	// the Now Playing component should manage most of the player state
 	setInterval(Player.update, 5000);
@@ -28,7 +29,9 @@ define([
 				toggleClass('icon-play', playerState.speed !== 0).
 				toggleClass('icon-pause', playerState.speed === 0);
 
-			this.select('selectorTitle').html( playerState.currentitem ? playerState.currentitem.title : 'None' );
+			this.select('selectorTitle').
+				attr('href', playerState.currentitem ? itemLink(playerState.currentitem) : 'javascript:void(0)').
+				html( playerState.currentitem ? playerState.currentitem.title : 'None' );
 
 			this.updatePlayTime(playerState);
 

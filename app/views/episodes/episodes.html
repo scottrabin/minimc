@@ -1,5 +1,5 @@
 {{#each episodes}}
-	<li><a href="#/tv-shows/{{slug showtitle}}/S{{lpad season 2}}E{{lpad episode 2}}/{{slug title}}">
+	<li><a href="{{itemLink this}}">
 		<img src="{{ thumbnail_path thumbnail }}" />
 		<div class="episode-metadata">
 			<span class="episode-number">Season: {{ season }} / Episode: {{ episode }}</span>
