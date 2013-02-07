@@ -14,19 +14,26 @@ function(defineComponent, VideoLibrary, mainView, promiseContent, movieTemplate)
 
 	function movieViewer() {
 
-		this.after('initialize', function() {
+		this.show = function() {
 			this.setContent(
 				this.$node,
 				movieTemplate,
 				VideoLibrary.getMovies().
 					then(function(movies) {
 						return {
-							"movies" : movies,
+							"movies" : _.sortBy(movies, comparator_by_name),
 						};
 					})
 			);
+		};
 
+		this.after('initialize', function() {
+			this.on('show', this.show);
 			this.activateOn(document, 'viewMovies');
 		});
+	}
+
+	function comparator_by_name(movie) {
+		return movie.title.toLowerCase().charCodeAt(0);
 	}
 });
