@@ -10,12 +10,25 @@ define(
 	'js/services/types/video.fields.episode',
 ],
 function(XbmcRpc, slugFilter, VIDEO_FIELDS_MOVIE, VIDEO_FIELDS_TVSHOW, VIDEO_FIELDS_SEASON, VIDEO_FIELDS_EPISODE) {
-	var VideoLibraryService = {};
+	var VideoLibraryService = {},
+		// internal cache variables
+		movies, tvshows, seasons, episodes;
+
+	VideoLibraryService.clearCache = function() {
+		movies   = null;
+		tvshows  = null;
+		seasons  = {};
+		episodes = {};
+	};
 
 	VideoLibraryService.getMovies = function() {
-		return XbmcRpc.VideoLibrary.GetMovies(VIDEO_FIELDS_MOVIE).then(function(results) {
-			return results.movies;
-		});
+		// cache the movies
+		if (!movies) {
+			movies = XbmcRpc.VideoLibrary.GetMovies(VIDEO_FIELDS_MOVIE).then(function(results) {
+				return results.movies;
+			});
+		}
+		return movies;
 	};
 
 	VideoLibraryService.getMovieFromSlug = function(movieSlug) {
@@ -31,15 +44,21 @@ function(XbmcRpc, slugFilter, VIDEO_FIELDS_MOVIE, VIDEO_FIELDS_TVSHOW, VIDEO_FIE
 	}
 
 	VideoLibraryService.getShows = function() {
-		return XbmcRpc.VideoLibrary.GetTVShows(VIDEO_FIELDS_TVSHOW).then(function(results) {
-			return results.tvshows;
-		});
+		if (!tvshows) {
+			tvshows = XbmcRpc.VideoLibrary.GetTVShows(VIDEO_FIELDS_TVSHOW).then(function(results) {
+				return results.tvshows;
+			});
+		}
+		return tvshows;
 	};
 
 	VideoLibraryService.getShowSeasons = function(tv_show) {
-		return XbmcRpc.VideoLibrary.GetSeasons(tv_show.tvshowid, VIDEO_FIELDS_SEASON).then(function(results) {
-			return results.seasons;
-		});
+		if (!seasons[tv_show.tvshowid]) {
+			seasons[tv_show.tvshowid] = XbmcRpc.VideoLibrary.GetSeasons(tv_show.tvshowid, VIDEO_FIELDS_SEASON).then(function(results) {
+				return results.seasons;
+			});
+		}
+		return seasons[tv_show.tvshowid];
 	};
 
 	VideoLibraryService.getShowFromSlug = function(showSlug) {
@@ -55,6 +74,15 @@ function(XbmcRpc, slugFilter, VIDEO_FIELDS_MOVIE, VIDEO_FIELDS_TVSHOW, VIDEO_FIE
 		});
 	};
 
+	VideoLibraryService.getEpisodes = function(tv_show) {
+		if (!episodes[tv_show.tvshowid]) {
+			episodes[tv_show.tvshowid] = XbmcRpc.VideoLibrary.GetEpisodes(tv_show.tvshowid, null, VIDEO_FIELDS_EPISODE).then(function(results) {
+				return results.episodes;
+			});
+		}
+		return episodes[tv_show.tvshowid];
+	};
+
 	VideoLibraryService.getEpisodeBySeasonEpisode = function(show, season, episode) {
 		return VideoLibraryService.getEpisodes(show).then(function(episodeList) {
 			for(var i = 0 ; i < episodeList.length ; i++) {
@@ -66,11 +94,8 @@ function(XbmcRpc, slugFilter, VIDEO_FIELDS_MOVIE, VIDEO_FIELDS_TVSHOW, VIDEO_FIE
 		});
 	}
 
-	VideoLibraryService.getEpisodes = function(tv_show) {
-		return XbmcRpc.VideoLibrary.GetEpisodes(tv_show.tvshowid, null, VIDEO_FIELDS_EPISODE).then(function(results) {
-			return results.episodes;
-		});
-	};
+	// Initialize the cache
+	VideoLibraryService.clearCache();
 
 	return VideoLibraryService;
 
