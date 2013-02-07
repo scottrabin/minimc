@@ -62,8 +62,6 @@ function(XbmcRpc, slugFilter, VIDEO_FIELDS_MOVIE, VIDEO_FIELDS_TVSHOW, VIDEO_FIE
 	};
 
 	VideoLibraryService.getShowFromSlug = function(showSlug) {
-		// TODO - Cache this? Store it locally and query against a map? Or is the use
-		// case generally low enough latency that this isn't really a problem?
 		return VideoLibraryService.getShows().then(function(shows) {
 			for (var i = 0 ; i < shows.length ; i++) {
 				if (showSlug === slugFilter(shows[i].title)) {
