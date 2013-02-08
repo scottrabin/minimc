@@ -5,7 +5,9 @@ define([
 	'js/services/Player',
 	'js/filters/formatTime',
 	'js/filters/itemLink',
-], function(defineComponent, Player, formatTime, itemLink) {
+	'js/filters/lpad',
+	'js/utility/video_type',
+], function(defineComponent, Player, formatTime, itemLink, lpad, videoType) {
 
 	return defineComponent(nowPlaying);
 
@@ -28,7 +30,7 @@ define([
 
 			this.select('selectorTitle').
 				attr('href', playerState.currentitem ? itemLink(playerState.currentitem) : 'javascript:void(0)').
-				html( playerState.currentitem ? playerState.currentitem.title : 'None' );
+				html( playerState.currentitem ? format_video_name(playerState.currentitem) : 'None' );
 
 			this.updatePlayTime(playerState);
 
@@ -63,5 +65,16 @@ define([
 			this.on('show', this.show);
 			this.on('hide', this.hide);
 		});
+	}
+
+	function format_video_name(videoFile) {
+		switch(videoType(videoFile)) {
+			case 'movie' :
+				return videoFile.title;
+			case 'episode' :
+				return videoFile.showtitle + ' S' + lpad(videoFile.season, 2) + 'E' + lpad(videoFile.episode, 2) + ': ' + videoFile.title;
+			default :
+				return '(unknown file type)';
+		}
 	}
 });
