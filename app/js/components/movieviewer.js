@@ -6,9 +6,10 @@ define(
 	'js/services/VideoLibrary',
 	'js/mixins/main-view',
 	'js/mixins/promiseContent',
+	'js/utility/sort_alphabetic',
 	'hbs!views/movies',
 ],
-function(defineComponent, VideoLibrary, mainView, promiseContent, movieTemplate) {
+function(defineComponent, VideoLibrary, mainView, promiseContent, sort_alphabetic, movieTemplate) {
 
 	return defineComponent(movieViewer, mainView, promiseContent);
 
@@ -21,7 +22,7 @@ function(defineComponent, VideoLibrary, mainView, promiseContent, movieTemplate)
 				VideoLibrary.getMovies().
 					then(function(movies) {
 						return {
-							"movies" : movies.sort(sort_by_name),
+							"movies" : movies.sort(sort_alphabetic('title')),
 						};
 					})
 			);
@@ -31,12 +32,5 @@ function(defineComponent, VideoLibrary, mainView, promiseContent, movieTemplate)
 			this.on('show', this.show);
 			this.activateOn(document, 'viewMovies');
 		});
-	}
-
-	function sort_by_name(movieA, movieB) {
-		var aLower = movieA.title.toLowerCase(),
-			bLower = movieB.title.toLowerCase();
-
-		return (aLower < bLower ? -1 : aLower > bLower ? 1 : 0);
 	}
 });

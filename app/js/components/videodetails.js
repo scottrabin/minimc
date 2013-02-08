@@ -7,10 +7,11 @@ define(
 	'js/mixins/promiseContent',
 	'js/services/VideoLibrary',
 	'js/services/Player',
+	'js/utility/sort_alphabetic',
 	'hbs!views/details-movie',
 	'hbs!views/details-episode',
 ],
-function(defineComponent, mainView, promiseContent, VideoLibrary, Player, movieDetails, episodeDetails) {
+function(defineComponent, mainView, promiseContent, VideoLibrary, Player, sort_alphabetic, movieDetails, episodeDetails) {
 
 	return defineComponent(videoViewer, mainView, promiseContent);
 
@@ -27,6 +28,10 @@ function(defineComponent, mainView, promiseContent, VideoLibrary, Player, movieD
 				VideoLibrary.getShowFromSlug(showData.title_slug).
 					then(function(show) {
 						return VideoLibrary.getEpisodeBySeasonEpisode(show, showData.season, showData.episode);
+					}).
+					then(function(episode) {
+						episode.cast.sort(sort_alphabetic('name'));
+						return episode;
 					})
 			).then(function(contentData) {
 				var node = contentData[0], episode = contentData[1];
@@ -38,7 +43,11 @@ function(defineComponent, mainView, promiseContent, VideoLibrary, Player, movieD
 			this.setContent(
 				this.$node,
 				movieDetails,
-				VideoLibrary.getMovieFromSlug(movieData.title_slug)
+				VideoLibrary.getMovieFromSlug(movieData.title_slug).
+					then(function(movie) {
+						movie.cast.sort(sort_alphabetic('name'));
+						return movie;
+					})
 			).then(function(contentData) {
 				var node = contentData[0], movie = contentData[1];
 				node.removeClass('episode').addClass('movie').data('source', movie);
