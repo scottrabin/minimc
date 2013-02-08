@@ -21,7 +21,7 @@ function(defineComponent, VideoLibrary, mainView, promiseContent, movieTemplate)
 				VideoLibrary.getMovies().
 					then(function(movies) {
 						return {
-							"movies" : _.sortBy(movies, comparator_by_name),
+							"movies" : movies.sort(sort_by_name),
 						};
 					})
 			);
@@ -33,7 +33,10 @@ function(defineComponent, VideoLibrary, mainView, promiseContent, movieTemplate)
 		});
 	}
 
-	function comparator_by_name(movie) {
-		return movie.title.toLowerCase().charCodeAt(0);
+	function sort_by_name(movieA, movieB) {
+		var aLower = movieA.title.toLowerCase(),
+			bLower = movieB.title.toLowerCase();
+
+		return (aLower < bLower ? -1 : aLower > bLower ? 1 : 0);
 	}
 });
