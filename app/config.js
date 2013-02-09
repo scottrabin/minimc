@@ -1,4 +1,7 @@
 require.config({
+	deps : [
+		'js/utility/features',
+	],
 	shim : {
 		"underscore" : {
 			exports : '_',
