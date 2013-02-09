@@ -1,8 +1,8 @@
 <?xml version="0.1" encoding="UTF-8"?>
 <addon
-	id="webinterface.wexbmc"
+	id="webinterface.minimc"
 	version="0.0.1"
-	name="wexbmc"
+	name="minimc"
 	provider-name="Scott Rabin">
 	<requires>
 		<import addon="xbmc.gui" version="2.11"/>
@@ -10,8 +10,8 @@
 	<extension
 		point="xbmc.gui.webinterface"/>
 	<extension point="xbmc.addon.metadata">
-		<summary lang="en">TODO - Summary</summary>
-		<description lang="en">TODO - Description</description>
+		<summary lang="en">Web-based remote for XBMC</summary>
+		<description lang="en">Use any device with internet access and a browser to control your XBMC software. Works with iPad/iPhone/iPod, Android phones and tablets, and any PC, Mac, or Linux device.</description>
 		<platform>all</platform>
 	</extension>
 </addon>

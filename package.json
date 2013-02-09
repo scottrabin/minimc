@@ -1,5 +1,5 @@
 {
-  "name": "wexbmc",
+  "name": "minimc",
   "version": "0.0.0",
   "description": "A web interface to control XBMC",
   "author": "Scott Rabin <scottrabin@gmail.com>",
