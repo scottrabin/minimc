@@ -103,7 +103,7 @@
 		background: transparent;
 		border-style: solid;
 		border-color: transparent;
-		border-width: 35px;
+		border-width: $remote-button-size;
 
 		&.left {
 			border-left-width : 0;
@@ -121,8 +121,8 @@
 
 	#remote-navigation {
 		position: relative;
-		height: 170px;
-		width: 170px;
+		height: 200px;
+		width: 200px;
 		margin: 0 auto;
 
 		.arrow {
@@ -130,43 +130,48 @@
 			&.up {
 				top: 0;
 				left: 50%;
-				margin-left: -35px;
+				margin-left: -$remote-button-size;
 			}
 			&.down {
 				bottom: 0;
 				left: 50%;
-				margin-left: -35px;
+				margin-left: -$remote-button-size;
 			}
 			&.left {
 				top: 50%;
 				left: 0;
-				margin-top: -35px;
+				margin-top: -$remote-button-size;
 			}
 			&.right {
 				top: 50%;
 				right: 0;
-				margin-top: -35px;
+				margin-top: -$remote-button-size;
 			}
 		}
+
+		.button {
+			font-size: 22px;
+		}
+
 		.enter,
 		.menu,
 		.home,
 		.stop,
 		.back {
 			position: absolute;
-			width: 35px;
-			height: 35px;
+			width: $remote-button-size;
+			height: $remote-button-size;
 			@include border-radius(100%);
 		}
 
 		.enter {
 			top: 50%;
 			left: 50%;
-			margin-top: -30px;
-			margin-left: -30px;
-			width: 60px;
-			height: 60px;
-			@include border-radius(60px);
+			margin-top: -($remote-playback-button-size / 2);
+			margin-left: -($remote-playback-button-size / 2);
+			width: $remote-playback-button-size;
+			height: $remote-playback-button-size;
+			@include border-radius(100%);
 		}
 		.menu {
 			top: 0;
