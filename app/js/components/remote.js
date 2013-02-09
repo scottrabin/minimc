@@ -17,6 +17,8 @@ define([
 	function remote() {
 
 		this.defaultAttrs({
+			"selectorRemote" : ".button.remote",
+			"selectorLibrary" : ".button.library",
 			"selectorRewind" : ".rewind",
 			"selectorPlayPause" : ".play-pause",
 			"selectorFastForward" : ".forward",
@@ -44,6 +46,14 @@ define([
 
 		this.fastForward = function() {
 			Player.setSpeed('increment');
+		};
+
+		this.showRemote = function() {
+			this.$node.css('height', '100%');
+		};
+
+		this.showLibrary = function() {
+			this.$node.css('height', '');
 		};
 
 		this.stop = Player.stop;
@@ -136,6 +146,8 @@ define([
 
 		this.after('initialize', function() {
 			this.on('click', {
+				"selectorRemote" : this.showRemote,
+				"selectorLibrary" : this.showLibrary,
 				"selectorRewind" : this.rewind,
 				"selectorPlayPause" : this.togglePlayPause,
 				"selectorFastForward" : this.fastForward,

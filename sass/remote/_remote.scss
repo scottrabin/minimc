@@ -1,6 +1,7 @@
 @import "compass/css3/box-sizing";
 @import "compass/css3/border-radius";
 @import "compass/css3/transition";
+@import "compass/css3/inline-block";
 
 #remote {
 	@include box-sizing(border-box);
@@ -27,7 +28,7 @@
 	}
 
 	#playback-controls {
-		margin: 8px 0;
+		margin: 8px;
 
 		.button {
 			padding: 0;
@@ -35,10 +36,28 @@
 			height: 60px;
 			font-size: 45px;
 			@include border-radius(60px);
-		}
 
-		.button.icon-pause {
-			font-size: 37px;
+			&.icon-pause {
+				font-size: 37px;
+			}
+			&.remote {
+				float: left;
+				font-size: 28px;
+				display: none;
+
+				html.no-touch & {
+					@include inline-block;
+				}
+			}
+			&.library {
+				float: right;
+				font-size: 30px;
+				display: none;
+
+				html.no-touch & {
+					@include inline-block;
+				}
+			}
 		}
 	}
 
