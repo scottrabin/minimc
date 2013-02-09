@@ -5,8 +5,9 @@ define([
 	'js/services/Player',
 	'js/services/Input',
 	'underscore',
+	'js/utility/features',
 	'hbs!views/subtitles',
-], function(defineComponent, Player, Input, _, subtitleTemplate) {
+], function(defineComponent, Player, Input, _, features, subtitleTemplate) {
 
 	var DRAG_THRESHOLD = 50;
 	var REGEX_ARROW_DIRECTION = /(up|down|left|right)/;
@@ -153,12 +154,14 @@ define([
 			this.on(document, 'playerSpeedChanged', this.updateControl);
 			this.on(document, 'playerSubtitlesChanged', this.updateSubtitles);
 
-			this.on('mousedown', {
-				"selectorGrip" : this.startDrag,
-			});
-			this.on('touchstart', {
-				"selectorGrip" : this.startDrag,
-			});
+			if (features.touch) {
+				this.on('mousedown', {
+					"selectorGrip" : this.startDrag,
+				});
+				this.on('touchstart', {
+					"selectorGrip" : this.startDrag,
+				});
+			}
 		});
 	}
 
