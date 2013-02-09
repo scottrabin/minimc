@@ -43,20 +43,10 @@
 			&.remote {
 				float: left;
 				font-size: 28px;
-				display: none;
-
-				html.no-touch & {
-					@include inline-block;
-				}
 			}
 			&.library {
 				float: right;
 				font-size: 30px;
-				display: none;
-
-				html.no-touch & {
-					@include inline-block;
-				}
 			}
 		}
 	}
