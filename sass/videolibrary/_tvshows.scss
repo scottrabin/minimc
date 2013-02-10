@@ -1,5 +1,6 @@
 @import "compass/css3/box-shadow";
 @import "compass/css3/border-radius";
+@import "compass/css3/transition";
 
 /* Series selector */
 #tv-shows {
@@ -28,6 +29,13 @@
 		height: 250px;
 		width: 175px;
 		overflow: hidden;
+
+		opacity: 0.4;
+		@include single-transition(opacity, 500ms);
+
+		&.active {
+			opacity: 1;
+		}
 
 		img {
 			height: 100%;

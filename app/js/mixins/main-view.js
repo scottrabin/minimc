@@ -39,7 +39,10 @@ define([
 		 * @private
 		 */
 		function switchActiveView(event, data) {
+			// temporarily ignore calls to hide other main view components
+			this.off(document, EVENT_MAIN_VIEW_HIDE_OTHERS, triggerHide);
 			this.trigger(document, EVENT_MAIN_VIEW_HIDE_OTHERS);
+			this.on(document, EVENT_MAIN_VIEW_HIDE_OTHERS, triggerHide);
 			triggerShow.call(this, data);
 		};
 
