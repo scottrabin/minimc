@@ -1,5 +1,5 @@
-{{#each episodes}}
-	<li class="{{ episodeClasses this }}"><a href="{{itemLink this}}">
+{{#each this}}
+	<li data-season="{{season}}" data-episode="{{episode}}" class="{{ episodeClasses this }}"><a href="{{itemLink this}}">
 		<img src="{{ thumbnail_path thumbnail }}" />
 		<div class="episode-metadata">
 			<span class="episode-number">Season: {{ season }} / Episode: {{ episode }}</span>

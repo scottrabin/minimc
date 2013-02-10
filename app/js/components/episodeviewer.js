@@ -16,52 +16,58 @@ function(defineComponent, mainView, promiseContent, VideoLibrary, when, _, seaso
 	return defineComponent(episodeViewer, mainView, promiseContent);
 
 	function episodeViewer() {
-		var currentShow, currentSeason,
-			seasons, episodes;
-
 		this.defaultAttrs({
-			"selectorSeasonList" : ".season-selector",
+			"selectorSeasonList"  : ".season-selector",
+			"selectorSeasons"     : ".season-selector li",
 			"selectorEpisodeList" : ".episode-selector",
+			"selectorEpisodes"    : ".episode-selector li",
 		});
+
+		this.fetchSeasons = function(tvshow) {
+			return this.setContent('selectorSeasonList', seasonTemplate, tvshow.then(VideoLibrary.getShowSeasons));
+		};
+
+		this.fetchEpisodes = function(tvshow) {
+			return this.setContent('selectorEpisodeList', episodeTemplate, tvshow.then(VideoLibrary.getEpisodes));
+		};
 
 		this.show = function(event, data) {
 			// if the title slug doesn't match, reset the season and episode data
-			if (currentShow !== data.title_slug) {
-				var show = VideoLibrary.getShowFromSlug(data.title_slug);
-				seasons  = show.then(VideoLibrary.getShowSeasons);
-				episodes = show.then(VideoLibrary.getEpisodes);
-				currentShow   = data.title_slug;
-				currentSeason = null;
+			if (this.currentShow !== data.title_slug) {
+				var tvshow       = VideoLibrary.getShowFromSlug(data.title_slug);
 
-				this.setContent(
-					'selectorSeasonList',
-					seasonTemplate,
-					seasons.then(function(seasons) {
-						return {
-							"seasons"       : seasons,
-							"currentSeason" : currentSeason,
-						};
-					})
-				);
-			}
-			// if the title slug doesn't match or the requested season has changed, re-render the episode selector
-			if (data.season !== currentSeason) {
-				currentSeason = data.season || 1;
-				this.setContent(
-					'selectorEpisodeList',
-					episodeTemplate,
-					episodes.then(function(episodes) {
-						return {
-							"episodes" : _.where(episodes, { season : currentSeason }),
-						};
-					})
-				);
+				this.currentShow = data.title_slug;
+				this.seasons     = this.fetchSeasons(tvshow);
+				this.episodes    = this.fetchEpisodes(tvshow);
+
+				this.trigger('view.change.tvshow.id', tvshow);
 			}
 
-			this.$node.show();
+			this.trigger('view.change.tvshow.season', data.season || 1);
+		};
+
+		this.setActiveSeason = function(event, season) {
+			this.selectAfter('selectorSeasons', this.seasons).
+				spread(function(elems) {
+					elems.removeClass('active').
+						filter('[data-season="' + season + '"]').
+							addClass('active');
+				});
+		};
+
+		this.filterEpisodeList = function(event, season) {
+			this.selectAfter('selectorEpisodes', this.episodes).
+				spread(function(elems) {
+					elems.each(function() {
+						$(this).toggle( $(this).data('season') == season );
+					});
+				});
 		};
 
 		this.after('initialize', function() {
+			this.on('view.change.tvshow.season', this.setActiveSeason);
+			this.on('view.change.tvshow.season', this.filterEpisodeList);
+
 			this.on('show', this.show);
 			this.activateOn(document, 'viewEpisodes');
 		});

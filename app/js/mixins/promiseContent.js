@@ -32,10 +32,27 @@ define(
 
 			return spinner.show(
 				promise.then(function(templateData) {
+					node.html( template(templateData) );
 					// return the appropriate data
-					return [node.html( template(templateData) ), templateData];
+					return templateData;
 				})
 			);
+		};
+
+		/**
+		 * Yields a promise for elements matching the selector after a given
+		 * promise is fulfilled.
+		 *
+		 * @param {String} selector The selector attribute of the component
+		 * @param {Promise} promise The promise to chain the selection to
+		 * @return {Promise(HTMLElement, Object)} A promise for the selected elements and
+		 *                                        the original promise value
+		 */
+		this.selectAfter = function(selector, promise) {
+			var self = this;
+			return promise.then(function(value) {
+				return [self.select(selector), value];
+			});
 		};
 	}
 });
