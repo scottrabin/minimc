@@ -19,7 +19,7 @@ define(
 		 * to the return value of the template applied
 		 * against the return value of the promise
 		 *
-		 * @param {String|HTMLElement} selector The node to replace the contents of
+		 * @param {String|HTMLElement=} selector The node to replace the contents of; defaults to this.$node
 		 * @param {Function(Object)} template The template function to use
 		 * @param {Promise} promise The promise that will return the correct data for the template
 		 * @return {Promise(HTMLElement, Object)} A promise for a node (or node set) with populated content
@@ -27,7 +27,15 @@ define(
 		 */
 		this.setContent = function(selector, template, promise) {
 			// get the correct node
-			var node = (typeof selector === 'string' ? this.select(selector) : selector);
+			var node;
+			if (arguments.length === 2) {
+				// omit the first element - shift the args and use the default
+				promise  = template;
+				template = selector;
+				node     = this.$node;
+			} else {
+				node     = (typeof selector === 'string' ? this.select(selector) : selector);
+			}
 
 			// blank the content
 			node.empty();

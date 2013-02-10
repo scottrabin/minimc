@@ -24,7 +24,6 @@ function(defineComponent, mainView, promiseContent, VideoLibrary, Player, sort_a
 
 		this.showEpisodeDetails = function(event, showData) {
 			this.setContent(
-				this.$node,
 				episodeDetails,
 				VideoLibrary.getShowFromSlug(showData.title_slug).
 					then(function(show) {
@@ -39,7 +38,6 @@ function(defineComponent, mainView, promiseContent, VideoLibrary, Player, sort_a
 
 		this.showMovieDetails = function(event, movieData) {
 			this.setContent(
-				this.$node,
 				movieDetails,
 				VideoLibrary.getMovieFromSlug(movieData.title_slug).
 					then(function(movie) {
@@ -75,9 +73,5 @@ function(defineComponent, mainView, promiseContent, VideoLibrary, Player, sort_a
 			this.on(document, 'viewMovieDetails', this.showMovieDetails);
 			this.activateOn(document, 'viewEpisodeDetails viewMovieDetails');
 		});
-	}
-
-	function is_movie(showData) {
-		return showData && showData.hasOwnProperty('movieid');
 	}
 });
