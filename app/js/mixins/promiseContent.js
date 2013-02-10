@@ -5,6 +5,8 @@ define(
 	'js/spinner',
 ], function(spinner) {
 
+	var EVENT_CONTENT_CHANGED = 'change.content';
+
 	return promiseContent;
 
 	/**
@@ -32,7 +34,7 @@ define(
 
 			return spinner.show(
 				promise.then(function(templateData) {
-					node.html( template(templateData) );
+					node.html( template(templateData) ).trigger(EVENT_CONTENT_CHANGED, templateData);
 					// return the appropriate data
 					return templateData;
 				})

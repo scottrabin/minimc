@@ -8,10 +8,11 @@ define(
 	'js/services/VideoLibrary',
 	'js/services/Player',
 	'js/utility/sort_alphabetic',
+	'js/utility/video_type',
 	'hbs!views/details-movie',
 	'hbs!views/details-episode',
 ],
-function(defineComponent, mainView, promiseContent, VideoLibrary, Player, sort_alphabetic, movieDetails, episodeDetails) {
+function(defineComponent, mainView, promiseContent, VideoLibrary, Player, sort_alphabetic, video_type, movieDetails, episodeDetails) {
 
 	return defineComponent(videoViewer, mainView, promiseContent);
 
@@ -33,10 +34,7 @@ function(defineComponent, mainView, promiseContent, VideoLibrary, Player, sort_a
 						episode.cast.sort(sort_alphabetic('name'));
 						return episode;
 					})
-			).then(function(contentData) {
-				var node = contentData[0], episode = contentData[1];
-				node.removeClass('movie').addClass('episode').data('source', episode);
-			});
+			);
 		};
 
 		this.showMovieDetails = function(event, movieData) {
@@ -48,10 +46,7 @@ function(defineComponent, mainView, promiseContent, VideoLibrary, Player, sort_a
 						movie.cast.sort(sort_alphabetic('name'));
 						return movie;
 					})
-			).then(function(contentData) {
-				var node = contentData[0], movie = contentData[1];
-				node.removeClass('episode').addClass('movie').data('source', movie);
-			});
+			);
 		};
 
 		this.playVideo = function(event) {
@@ -60,10 +55,21 @@ function(defineComponent, mainView, promiseContent, VideoLibrary, Player, sort_a
 			Player[playWhich]( this.$node.data('source') );
 		}
 
+		this.updateDetailView = function(event, tmplData) {
+			var videoType = video_type(tmplData);
+
+			$(event.target).
+				toggleClass('episode', videoType == 'episode').
+				toggleClass('movie', videoType == 'movie').
+				data('source', tmplData);
+		};
+
 		this.after('initialize', function() {
 			this.on('click', {
 				'selectorVideoImage': this.playVideo,
 			});
+
+			this.on('change.content', this.updateDetailView);
 
 			this.on(document, 'viewEpisodeDetails', this.showEpisodeDetails);
 			this.on(document, 'viewMovieDetails', this.showMovieDetails);
