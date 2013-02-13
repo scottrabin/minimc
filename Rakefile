@@ -55,7 +55,7 @@ namespace :build do
 		desc "Copy the jQuery dependency to the build directory and build an alternate app payload"
 		task :js => OUT_DIR do
 			cp File.join(APP_DIR, 'components/jquery/jquery.js'), File.join(OUT_DIR, 'jquery.min.js')
-			sh "r.js -o ./app.build.js paths.js/services/Ajax=js/services/AjaxDemo optimize=none out=#{OUT_DIR}/#{JS_OUT}"
+			sh "r.js -o ./app.build.js paths.js/services/Ajax=js/services/AjaxDemo paths.js/filters/thumbnail_path=js/filters/demo_thumbnail optimize=none out=#{OUT_DIR}/#{JS_OUT}"
 		end
 	end
 	desc "Build the demo app"
