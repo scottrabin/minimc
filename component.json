@@ -9,6 +9,7 @@
     "when": "~1.7.1",
     "require-handlebars-plugin": "git://github.com/SlexAxton/require-handlebars-plugin.git#~0.4.0",
     "js-signals": "git://github.com/millermedeiros/js-signals.git#~1.0.0",
-    "underscore": "~1.4.4"
+    "underscore": "~1.4.4",
+    "almond": "~0.2.4"
   }
 }
