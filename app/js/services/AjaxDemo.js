@@ -8,7 +8,7 @@ define(
 
 	var playerSpeed = 0;
 	var playerTime = {};
-	var totalTime = getTime(2400);
+	var totalTime = getTime(1300);
 	var currentItem;
 
 	function get_result(command, params) {
@@ -36,6 +36,9 @@ define(
 
 	setInterval(function() {
 		playerTime = getTime(fromTime(playerTime) + playerSpeed);
+		if (fromTime(playerTime) > fromTime(totalTime)) {
+			currentItem = null;
+		}
 	}, 1000);
 
 	var RETURN_VARS = {
@@ -82,7 +85,9 @@ define(
 		"Player.GetActivePlayers" : [
 			{
 				when : true,
-				result : [{playerid : 1, type : 'video' }]
+				result : function() {
+					return (currentItem ? [{playerid : 1, type : 'video' }] : []);
+				}
 			}
 		],
 		"VideoLibrary.GetMovies" : [
