@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html class="no-js no-touch">
+<head>
+	<meta charset="utf-8">
+	<title>MiniMC : The Web XBMC Remote</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width">
+	<link href="css/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
+	<link href="css/theme-dark.css" media="screen, projection" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<section id="remote">
+	<section id="playback-controls">
+		<button class="button remote icon-remote"></button>
+		<button class="button rewind icon-backward"></button>
+		<button class="button play-pause icon-play"></button>
+		<button class="button forward icon-forward"></button>
+		<button class="button library icon-library"></button>
+	</section>
+	<section id="now-playing">
+		<span class="status"></span>
+		<a class="current-item"></a>
+		<span class="playtime">
+			<span class="elapsed"></span>/<span class="total"></span>
+		</span>
+	</section>
+	<div class="grip-bar">
+		<div id="grippy-grip"></div>
+	</div>
+	<section id="remote-navigation">
+		<button class="button stop icon-stop"></button>
+		<button class="arrow up"></button>
+		<button class="arrow down"></button>
+		<button class="arrow left"></button>
+		<button class="arrow right"></button>
+		<button class="button enter"></button>
+		<button class="button menu icon-menu"></button>
+		<button class="button home icon-home"></button>
+		<button class="button back icon-undo-2"></button>
+	</section>
+	<section id="playback-subtitles">
+		Subtitles:
+		<div id="subtitles-available"></div>
+	</section>
+</section>
+<section id="video-library">
+	<nav>
+		<a href="#/movies" class="button">Movies</a>
+		<a href="#/tv-shows" class="button">TV Shows</a>
+	</nav>
+	<ul id="movies"></ul>
+	<ul id="tv-shows"></ul>
+	<section id="episodes">
+		<ol class="season-selector"></ol>
+		<ol class="episode-selector"></ol>
+	</section>
+	<section id="video-details">
+	</section>
+</section>
+<div id="spinner" class="icon-spinner"></div>
+
+<script src="./jquery.min.js"></script>
+<script src="./minimc.js"></script>
+
+
+</body>
+</html>
