@@ -25,8 +25,8 @@ define([
 			this.trigger(playerState.currentitem ? 'show' : 'hide');
 
 			this.select('selectorStatus').
-				toggleClass('icon-play', playerState.speed !== 0).
-				toggleClass('icon-pause', playerState.speed === 0);
+				toggleClass('icon-play', playerState.speed !== 1).
+				toggleClass('icon-pause', playerState.speed === 1);
 
 			this.select('selectorTitle').
 				attr('href', playerState.currentitem ? itemLink(playerState.currentitem) : 'javascript:void(0)').
