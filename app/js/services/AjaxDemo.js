@@ -27,6 +27,40 @@ define(
 				result : [{playerid : 1, type : 'video' }]
 			}
 		],
+		"VideoLibrary.GetMovies" : [
+			{
+				when : true,
+				result : {
+					movies : [
+						{ movieid : 1, year : 1985, title : 'Clue',
+							art : { poster : 'http://d3gtl9l2a4fn1j.cloudfront.net/t/p/w185/suzDcrxpuNPDnBwOOy8vBLsygwp.jpg' },
+							plot : "Clue finds six colorful dinner guests gathered at the mansion of their host, Mr. Boddy -- who turns up dead after his secret is exposed: He was blackmailing all of them. With the killer among them, the guests and Boddy's chatty butler must suss out the culprit before the body count rises.",
+							cast : [{"name":"Lesley Ann Warren","role":"Miss Scarlet"},{"name":"Christopher Lloyd","role":"Professor Plum"},{"name":"Eileen Brennan","role":"Mrs. Peacock"},{"name":"Tim Curry","role":"Wadsworth"},{"name":"Madeline Kahn","role":"Mrs. White"},{"name":"Martin Mull","role":"Colonel Mustard"},{"name":"Michael McKean","role":"Mr. Green"},{"name":"Colleen Camp","role":"Yvette"},{"name":"Lee Ving","role":"Mr. Boddy"},{"name":"Bill Henderson","role":"The Cop"},{"name":"Jane Wiedlin","role":"The Singing Telegram"}]
+						},
+						{ movieid : 2, year : 2009, title : 'District 9',
+							art : { poster : 'http://d3gtl9l2a4fn1j.cloudfront.net/t/p/w185/axFmCRNQsW6Bto8XuJKo08MPPV5.jpg' },
+							plot : "Aliens land in South Africa and have no way home. Years later after living in a slum and wearing out their welcome the \"Non-Humans\" are being moved to a new tent city overseen by Multi-National United (MNU). The movie follows an MNU employee tasked with leading the relocation and his relationship with one of the alien leaders.",
+							cast : [{"name":"William Allen Young","role":"Dirk Michaels"},{"name":"Robert Hobbs","role":"Ross Pienaar"},{"name":"Sharlto Copley","role":"Wikus van der Merwe"},{"name":"Jason Cope","role":"Grey Bradnam"},{"name":"Vanessa Haywood","role":"Tania Van De Merwe"},{"name":"Kenneth Nkosi","role":"Thomas"}]
+						},
+						{ movieid : 3, year : 2002, title : 'Harry Potter and the Chamber of Secrets',
+							art : { poster : 'http://d3gtl9l2a4fn1j.cloudfront.net/t/p/w185/lryNn7sNkvQIg45KwgeKnMxSSRX.jpg' },
+							plot : "Everyone's favorite novice wizard, Harry Potter, continues his high-flying adventures at Hogwarts. This time around, Harry ignores warnings not to return to school - that is, if he values his life - to investigate a mysterious series of attacks with Ron and Hermione.",
+							cast : [{"name":"Daniel Radcliffe","role":"Harry Potter"},{"name":"Rupert Grint","role":"Ron Weasley"},{"name":"Emma Watson","role":"Hermione Granger"},{"name":"Martin Bayfield","role":"Young Rubeus Hagrid"},{"name":"Heather Bleasdale","role":"Mrs Granger"},{"name":"Sean Biggerstaff","role":"Oliver Wood"},{"name":"David Bradley","role":"Argus Filch"},{"name":"Kenneth Branagh","role":"Gilderoy Lockhart"},{"name":"Veronica Clifford","role":"Mrs Mason"},{"name":"John Cleese","role":"Nearly Headless Nick"},{"name":"Robbie Coltrane","role":"Rubeus Hagrid"},{"name":"Eleanor Columbus","role":"Susan Bones"},{"name":"Christian Coulson","role":"Tom Marvolo Riddle"},{"name":"Warwick Davis","role":"Filius Flitwick"},{"name":"Emily Dale","role":"Katie Bell"},{"name":"Rochelle Douglas","role":"Alicia Spinnet"},{"name":"Richard Griffiths","role":"Uncle Vernon Dursley"},{"name":"Julie Walters","role":"Molly Weasley"},{"name":"Matthew Lewis","role":"Neville Longbottom"},{"name":"Alan Rickman","role":"Severus Snape"},{"name":"Richard Harris","role":"Albus Dumbledore"},{"name":"Tom Felton","role":"Draco Malfoy"},{"name":"Leslie Phillips","role":"The Sorting Hat (voice)"},{"name":"Jason Isaacs","role":"Lucius Malfoy"},{"name":"Maggie Smith","role":"Professor Minerva McGonagall"}]
+						},
+						{ movieid : 4, year : 1992, title : 'My Cousin Vinny',
+							art : { poster : 'http://d3gtl9l2a4fn1j.cloudfront.net/t/p/w185/2lhWjSkRHZREw5wXoWHO88lpODe.jpg' },
+							plot : "Two carefree pals traveling through Alabama are mistakenly arrested, and charged with murder. Fortunately, one of them has a cousin who's a lawyer - Vincent Gambini, a former auto mechanic from Brooklyn who just passed his bar exam after his sixth try. When he arrives with his leather-clad girlfriend , to try his first case, it's a real shock - for him and the Deep South!",
+							cast : [{"name":"Joe Pesci","role":"Vincent 'Vinny' Gambini"},{"name":"Ralph Macchio","role":"William 'Billy' Gambini"},{"name":"Marisa Tomei","role":"Mona Lisa Vito"},{"name":"Mitchell Whitfield","role":"Stan Rothenstein"},{"name":"Fred Gwynne","role":"Judge Chamberlain Haller"}]
+						},
+						{ movieid : 5, year : 2005, title : 'Serenity',
+							art : { poster : 'http://d3gtl9l2a4fn1j.cloudfront.net/t/p/w185/iaE3I86DtOfb8a1Kmsko3Gbr6fq.jpg' },
+							plot : "When the renegade crew of Serenity agrees to hide a fugitive on their ship, they find themselves in an action-packed battle between the relentless military might of a totalitarian regime who will destroy anything - or anyone - to get the girl back and the bloodthirsty creatures who roam the uncharted areas of space. But, the greatest danger of all may be on their ship.",
+							cast : [{"name":"Nathan Fillion","role":"Mal"},{"name":"Gina Torres","role":"Zoe"},{"name":"Alan Tudyk","role":"Wash"},{"name":"Morena Baccarin","role":"Inara"},{"name":"Adam Baldwin","role":"Jayne"},{"name":"Jewel Staite","role":"Kaylee"},{"name":"Sean Maher","role":"Simon"},{"name":"Summer Glau","role":"River"},{"name":"Ron Glass","role":"Shepherd Book"},{"name":"Chiwetel Ejiofor","role":"The Operative"},{"name":"David Krumholtz","role":"Mr. Universe"},{"name":"Michael Hitchcock","role":"Dr. Mathias"},{"name":"Sarah Paulson","role":"Dr. Caron"},{"name":"Yan Feldman","role":"Mingo"},{"name":"Rafael Feldman","role":"Fanty"},{"name":"Nectar Rose","role":"Lenore"},{"name":"Tamara Taylor","role":"Teacher"},{"name":"Glenn Howerton","role":"Lilac Young Tough"},{"name":"Hunter Ansley Wryn","role":"Young River"},{"name":"Logan O'Brien","role":"Boy Student"},{"name":"Erik Erotas","role":"Boy Student"},{"name":"Demetra Raven","role":"Girl Student"},{"name":"Jessica Huang","role":"Girl Student"},{"name":"Marley McClean","role":"Girl Student"},{"name":"Scott Kinworthy","role":"Ensign"},{"name":"Erik Weiner","role":"Helmsman"},{"name":"Conor O'Brien","role":"Lab Technician"},{"name":"Peter James Smith","role":"Lab Technician"},{"name":"Weston Nathanson","role":"Trade Agent"},{"name":"Carrie 'CeCe' Cline","role":"Young Female Intern"},{"name":"Chuck O'Neil","role":"Vault Guard"},{"name":"Amy Wieczorek","role":"Lilac Mom"},{"name":"Tristan Jarred","role":"Lilac Son"},{"name":"Elaine Mani Lee","role":"Fan Dancer"},{"name":"Terrence Hardy Jr.","role":"Mining Camp Boy"},{"name":"Brian O'Hare","role":"Alliance Pilot"},{"name":"Ryan Tasz","role":"Black Room Soldier"},{"name":"Colin Patrick Lynch","role":"Black Room Soldier"},{"name":"Terrell Tilford","role":"News Anchor"},{"name":"Joshua Michael Kwiat","role":"Slovenly Beaumonde Man"},{"name":"Antonio Rufino","role":"Bartender"},{"name":"Linda Wang","role":"Chinese snake dancer"},{"name":"Mark Winn","role":"Futuristic Worker"}]
+						},
+					]
+				}
+			}
+		],
 		"VideoLibrary.GetTVShows" : [
 			{
 				when : true,
