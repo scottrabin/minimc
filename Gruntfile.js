@@ -12,12 +12,12 @@ module.exports = function(grunt) {
         ]
       },
       production: {
-        src: ['src/js/**/*.js'],
-        dest: 'app/js/app.js'
+        src: ['src/app.js'],
+        dest: 'app/app.js'
       },
       dev: {
-        src: ['src/js/**/*.js'],
-        dest: 'app/js/app.js'
+        src: ['src/app.js'],
+        dest: 'app/app.js'
       }
     },
     copy: {
