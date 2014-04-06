@@ -6,6 +6,6 @@ var fs = require('fs');
 exports.routes = {
   DEFAULT: {
     template: fs.readFileSync(__dirname + '/remote.html'),
-    ctrl: 'minimc.remote.RemoteCtrl'
+    controller: 'RemoteCtrl'
   }
 };
