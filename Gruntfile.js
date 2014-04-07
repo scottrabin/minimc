@@ -52,5 +52,5 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-copy');
 
-  grunt.registerTask('dev', ['browserify:dev', 'copy:dev', 'watch']);
+  grunt.registerTask('dev', grunt.config.get('watch.tasks').concat('watch'));
 };
