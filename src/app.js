@@ -4,20 +4,14 @@
 require('angular');
 require('angular-route');
 
-// subsections
-var remoteSection = require('./remote');
-var movieIndexSection = require('./movie-index');
-
 // define the main application module
 angular.module('minimc', [
   'ngRoute',
-  'minimc.movieIndex',
-  'minimc.remote'
+  require('./movie-index').name,
+  require('./remote').name
 ]).
 config(['$routeProvider', function($routeProvider) {
   $routeProvider.otherwise({redirectTo: '/remote'});
-  $routeProvider.when('/remote', remoteSection.routes.DEFAULT);
-  $routeProvider.when('/movies', movieIndexSection.routes.DEFAULT);
 }]);
 
 // generic dependencies

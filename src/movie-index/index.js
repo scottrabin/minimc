@@ -1,14 +1,16 @@
 "use strict";
 
-require('./movie-index.module');
-require('./movie.directive');
-require('./movie-index.controller');
+require('angular');
+require('angular-route');
 
 var fs = require('fs');
 
-exports.routes = {
-  DEFAULT: {
-    template: fs.readFileSync(__dirname + '/movie-index.html'),
-    controller: 'MovieIndexCtrl'
-  }
-};
+module.exports = angular.module('minimc.movieIndex', [])
+  .controller('MovieIndexCtrl', require('./movie-index.controller'))
+  .directive('mcMovie', require('./movie.directive'))
+  .config(['$routeProvider', function($routeProvider) {
+    $routeProvider.when('/movies', {
+      template: fs.readFileSync(__dirname + '/movie-index.html'),
+      controller: 'MovieIndexCtrl'
+    });
+  }]);

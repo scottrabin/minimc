@@ -1,10 +1,10 @@
 "use strict";
 
-require('angular');
+var fs = require('fs');
 
-angular.module('minimc.movieIndex').directive('mcMovie', function() {
+module.exports = function() {
   return {
     restrict: 'E',
     template: require('fs').readFileSync(__dirname + '/movie.directive.html')
   };
-});
+};

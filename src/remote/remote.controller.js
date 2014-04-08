@@ -1,5 +1,5 @@
-var RemoteModule = require('./remote.module');
+"use strict";
 
-RemoteModule.controller('RemoteCtrl', [function() {
+module.exports = function() {
 
-}]);
+};
