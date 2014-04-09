@@ -6,18 +6,31 @@ module.exports = function(grunt) {
     browserify: {
       options: {
         transform: ['brfs'],
-        alias: [
-          "bower_components/angular/angular.js:angular",
-          "bower_components/angular-route/angular-route.js:angular-route"
-        ]
       },
       production: {
         src: ['src/app.js'],
-        dest: 'app/app.js'
+        dest: 'app/app.js',
+        options: {
+          alias: [
+            "bower_components/angular/angular.js:angular",
+            "bower_components/angular-route/angular-route.js:angular-route"
+          ]
+        }
       },
       dev: {
         src: ['src/app.js'],
-        dest: 'app/app.js'
+        dest: 'app/app.js',
+        options: {
+          ignore: ['bower_components/angular/angular.js'],
+          alias: [
+            "bower_components/angular/angular.js:angular",
+            "bower_components/angular-route/angular-route.js:angular-route"
+          ]
+        }
+      },
+      devTool: {
+        src: ['src/dev/tool.js'],
+        dest: 'app/devTool.js'
       }
     },
     copy: {
@@ -44,7 +57,7 @@ module.exports = function(grunt) {
     },
     watch: {
       files: 'src/**/*',
-      tasks: ['browserify:dev', 'copy:dev']
+      tasks: ['browserify:dev', 'browserify:devTool', 'copy:dev']
     }
   });
 

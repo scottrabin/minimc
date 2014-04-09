@@ -5,7 +5,9 @@ require('angular-route');
 
 var fs = require('fs');
 
-module.exports = angular.module('minimc.movieIndex', [])
+module.exports = angular.module('minimc.movieIndex', [
+  require('../components/xbmc').name
+])
   .controller('MovieIndexCtrl', require('./movie-index.controller'))
   .directive('mcMovie', require('./movie.directive'))
   .config(['$routeProvider', function($routeProvider) {
