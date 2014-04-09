@@ -34,12 +34,22 @@ module.exports = function(grunt) {
       }
     },
     copy: {
+      font: {
+        files: [
+          {
+            expand: true,
+            cwd: './vendor/Font-Awesome/fonts/',
+            src: '*',
+            dest: 'app/assets/fonts'
+          }
+        ]
+      },
       dev: {
         files: [
           {
             expand: true,
             cwd: 'src/',
-            src: ['./**/*.html', './**/*.css', '!./partials/**/*'],
+            src: 'index.html',
             dest: 'app/'
           }
         ]
@@ -55,15 +65,37 @@ module.exports = function(grunt) {
         ]
       },
     },
+    sass: {
+      compile: {
+        files: {
+          "app/css/wexbmc.css": "src/sass/wexbmc.scss"
+        }
+      }
+    },
     watch: {
-      files: 'src/**/*',
-      tasks: ['browserify:dev', 'browserify:devTool', 'copy:dev']
+      html: {
+        files: "src/index.html",
+        tasks: "copy:dev"
+      },
+      js: {
+        files: ["src/**/*.js", "src/**/*.html"],
+        tasks: ['browserify:dev']
+      },
+      css: {
+        files: 'src/sass/**/*',
+        tasks: ['sass']
+      },
+      devtools: {
+        files: 'src/dev/**/*',
+        tasks: ['browserify:devTool']
+      }
     }
   });
 
   grunt.loadNpmTasks('grunt-browserify');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-sass');
 
-  grunt.registerTask('dev', grunt.config.get('watch.tasks').concat('watch'));
+  grunt.registerTask('dev', ['copy:font', 'copy:dev', 'browserify:dev', 'browserify:devTool', 'sass', 'watch']);
 };

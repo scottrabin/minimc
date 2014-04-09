@@ -3,13 +3,13 @@
 <head>
     <meta charset="utf-8">
     <title>My AngularJS App</title>
-    <link rel="stylesheet" href="css/app.css"/>
+    <link rel="stylesheet" href="css/wexbmc.css"/>
 </head>
 <body>
-    <ul class="menu">
-        <li><a href="#/remote">Remote</a></li>
-        <li><a href="#/movies">Movies</a></li>
-    </ul>
+    <nav class="menu" id="top-navigation">
+        <a class="fa fa-th" href="#/remote"></a>
+        <a class="fa fa-film" href="#/movies"></a>
+    </nav>
 
     <div ng-view></div>
     <!-- production -->

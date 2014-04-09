@@ -1,0 +1,43 @@
+// Styles for the Movie selection display
+@import "_mixins.scss";
+
+mc-movie {
+		display: inline-block;
+
+		border: 1px solid #444444;
+		box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+
+		vertical-align: top;
+
+		@include at-width(0, $movie-poster-width * 3 + $movie-poster-spacing * 2 * 2) {
+			margin: $movie-poster-spacing 1%;
+			width: 48%;
+		}
+		@include at-width($movie-poster-width * 3 + $movie-poster-spacing * 2 * 2, $movie-poster-width * 4 + $movie-poster-spacing * 2 * 3 + 20px) {
+			margin: $movie-poster-spacing 1%;
+			width: 31%;
+		}
+		@include at-width($movie-poster-width * 4 + $movie-poster-spacing * 2 * 3 + 20px) {
+			margin: $movie-poster-spacing;
+			width: $movie-poster-width;
+		}
+
+		a {
+			display: inline-block;
+			width: 100%;
+			padding: 6px;
+		}
+
+		img {
+			display: block;
+			max-width: 100%;
+			max-height: 255px;
+			margin: 0 auto 5px;
+		}
+
+		.movie--name {
+			display: block;
+			color: #fafafa;
+			text-align: center;
+		}
+}
