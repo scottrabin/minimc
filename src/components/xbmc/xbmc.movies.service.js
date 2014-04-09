@@ -1,6 +1,7 @@
 "use strict";
 
 var Movie = require('../../minimc/movie');
+var compare = require('../../util/compare');
 
 module.exports = function XbmcMovieService(xbmc, movieProperties) {
   return {
@@ -8,7 +9,11 @@ module.exports = function XbmcMovieService(xbmc, movieProperties) {
       return xbmc('VideoLibrary.GetMovies', {
         properties: movieProperties
       }).then(function(response) {
-        return response.data.result.movies.map(Movie.create);
+        return response.data.result.movies
+          .map(Movie.create)
+          .sort(function(a, b) {
+            return compare.string(a.getTitle(), b.getTitle());
+          });
       });
     }
   };
