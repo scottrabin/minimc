@@ -8,6 +8,7 @@ require('angular-route');
 angular.module('minimc', [
   'ngRoute',
   require('./components/xbmc').name,
+  require('./detail').name,
   require('./movie-index').name,
   require('./remote').name
 ])

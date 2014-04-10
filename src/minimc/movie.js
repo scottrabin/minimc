@@ -30,12 +30,21 @@ Movie.prototype.getPoster = function() {
 };
 
 /**
+ * Get the slug identifying this movie
+ *
+ * @return {String}
+ */
+Movie.prototype.getSlug = function() {
+  return toSlug(this.getTitle());
+};
+
+/**
  * Get the permalink to this movie
  *
  * @return {String}
  */
 Movie.prototype.getPermalink = function() {
-  return "#/movies/" + toSlug(this.getTitle());
+  return "#/movies/" + this.getSlug();
 };
 
 // convenience function to create instances of this class
