@@ -12,6 +12,10 @@ angular.module('minimc', [
   require('./movie-index').name,
   require('./remote').name
 ])
+.filter('encodeURIComponent', [function() {
+  return encodeURIComponent;
+}])
+.directive('mcCastList', require('./components/castlist/castlist.directive'))
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.otherwise({redirectTo: '/remote'});
 }]);

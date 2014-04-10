@@ -1,0 +1,27 @@
+// Cast generic styles
+.cast {
+	margin: 10px;
+	list-style-type: none;
+
+	.actor {
+		height: 65px;
+		margin: 4px;
+
+		* {
+			line-height: 65px;
+			vertical-align: middle;
+		}
+
+		.actor--photo {
+			display: inline-block;
+			height: 100%;
+			width: 65px;
+			margin: 0 10px;
+			text-align: center;
+
+			img {
+				height: 100%;
+			}
+		}
+	}
+}

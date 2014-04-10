@@ -1,6 +1,7 @@
 "use strict";
 
 var toSlug = require('../util/slug');
+var Actor = require('./actor');
 
 /**
  * Class encapsulating the Movie data type
@@ -27,6 +28,18 @@ Movie.prototype.getTitle = function() {
  */
 Movie.prototype.getPoster = function() {
   return decodeURIComponent(this._src.art.poster.slice(8, -1));
+};
+
+/**
+ * Get the list of cast members
+ *
+ * @return {Array<Actor>}
+ */
+Movie.prototype.getCast = function() {
+  if (!this._cast) {
+    this._cast = this._src.cast.map(Actor.create);
+  }
+  return this._cast;
 };
 
 /**
