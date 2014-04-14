@@ -11,5 +11,13 @@ module.exports = angular.module('minimc.xbmc', [])
                                 "streamdetails", "top250", "votes", "fanart",
                                 "thumbnail", "file", "sorttitle", "resume",
                                 "setid", "dateadded", "tag", "art"])
+  .constant('tvShowProperties', ["title", "genre", "year", "rating", "plot",
+                                 "studio", "mpaa", "cast", "playcount",
+                                 "episode", "imdbnumber", "premiered", "votes",
+                                 "lastplayed", "fanart", "thumbnail", "file",
+                                 "originaltitle", "sorttitle", "episodeguide",
+                                 "season", "watchedepisodes", "dateadded",
+                                 "tag", "art"])
   .service('xbmc', require('./xbmc.service'))
-  .service('movies', require('./xbmc.movies.service'));
+  .service('movies', require('./xbmc.movies.service'))
+  .service('tvshows', require('./xbmc.tvshows.service'))

@@ -1,0 +1,9 @@
+"use strict";
+
+module.exports = function TvShowIndexCtrl($scope, tvshows) {
+  tvshows.fetch().then(function(shows) {
+    $scope.tvshows = shows;
+  });
+};
+
+module.exports.$inject = ['$scope', 'tvshows'];

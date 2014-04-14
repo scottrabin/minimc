@@ -10,6 +10,7 @@ angular.module('minimc', [
   require('./components/xbmc').name,
   require('./detail').name,
   require('./movie-index').name,
+  require('./tvshow-index').name,
   require('./remote').name
 ])
 .filter('encodeURIComponent', [function() {

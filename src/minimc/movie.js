@@ -10,7 +10,7 @@ var Actor = require('./actor');
  */
 function Movie(movie) {
   this._src = movie;
-};
+}
 
 /**
  * Get the title of the movie

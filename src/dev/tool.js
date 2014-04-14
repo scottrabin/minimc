@@ -10,6 +10,7 @@ angular.module('minimc')
     // These files are not committed in the repository because who knows
     // who might issue a takedown response for some copyright claims
     var responses = {
+      "VideoLibrary.GetTVShows": fs.readFileSync(__dirname + '/VideoLibrary.GetTVShows.json', 'utf8'),
       "VideoLibrary.GetMovies": fs.readFileSync(__dirname + '/VideoLibrary.GetMovies.json', 'utf8')
     };
     // pass through all GET requests to any source files
