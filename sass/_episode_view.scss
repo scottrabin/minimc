@@ -1,0 +1,44 @@
+// Styles for the Movie selection display
+@import "_mixins.scss";
+
+#now-playing.tvshow {
+	.episode--previous,
+	.episode--next {
+		display: block;
+		width: 70px;
+		line-height: 35px;
+	}
+
+	.episode--previous {
+		float: left;
+
+		&::before {
+			content: "\2039";
+			margin-right: 2px;
+			font-size: 240%;
+		}
+	}
+
+	.episode--next {
+		float: right;
+		text-align: right;
+
+		&::after {
+			content: "\203a";
+			margin-left: 2px;
+			font-size: 240%;
+		}
+	}
+}
+
+#tvshow-episode-view {
+	text-align: center;
+
+	img {
+		max-width: 100%;
+	}
+
+	.plot {
+		text-align: left;
+	}
+}

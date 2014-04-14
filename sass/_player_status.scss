@@ -1,0 +1,33 @@
+// Player status styles
+@import "_mixins.scss";
+
+#player-status {
+	display: none;
+
+	height: $player-status-height;
+	padding: 0 5px;
+	line-height: $player-status-height;
+
+	background-color: #3a3a3a;
+
+	overflow: hidden;
+
+	&.active {
+		display: block;
+
+		& ~ .screen {
+			// screens after an active status section should get bumped down a bit more
+			top: ($navigation-height + $player-status-height);
+		}
+	}
+
+	.fa {
+		margin-right: 5px;
+		font-size: 16px;
+	}
+
+	.elapsed-time {
+		float: right;
+		margin-left: 5px;
+	}
+}

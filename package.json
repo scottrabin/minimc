@@ -1,0 +1,20 @@
+{
+  "name": "minimc-sass",
+  "version": "0.0.0",
+  "description": "SASS source files for MiniMC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/scottrabin/minimc.git"
+  },
+  "author": "Scott Rabin (scottrabin@gmail.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/scottrabin/minimc/issues"
+  },
+  "homepage": "https://github.com/scottrabin/minimc/tree/angularjs",
+  "devDependencies": {
+    "grunt": "^0.4.4",
+    "grunt-contrib-copy": "^0.5.0",
+    "grunt-sass": "^0.12.1"
+  }
+}

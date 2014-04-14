@@ -1,0 +1,103 @@
+// Styles for the Remote panel
+#remote {
+	button {
+		border: 1px solid #333;
+		border-radius: 3px;
+		box-shadow: 1px 1px 3px #000;
+	}
+
+	.remote--speed {
+		text-align: center;
+
+		button {
+			width: $remote-button-size;
+			height: $remote-button-size;
+
+			margin: $remote-button-spacing;
+		}
+	}
+
+	.remote--subtitles {
+		margin: 5px;
+		padding: 4px;
+
+		border: 1px solid gray;
+		border-radius: 3px;
+
+		button {
+			padding: 2px 4px;
+			margin: 0 4px;
+
+			&.active {
+				background-color: #888;
+			}
+		}
+	}
+
+	.remote--menus {
+		$remote-height: (3 * $remote-button-size) + (2 * $remote-button-spacing);
+		$first-row: 0;
+		$second-row: ($remote-button-size + $remote-button-spacing);
+		$third-row: (2 * $remote-button-size + 2 * $remote-button-spacing);
+
+		position: relative;
+		height: $remote-height;
+		width: (3 * $remote-button-size);
+
+		margin: $remote-button-spacing auto;
+
+		button {
+			position: absolute;
+			width: $remote-button-size;
+			height: $remote-button-size;
+			margin-left: -($remote-button-size / 2);
+		}
+
+		.button-direction {
+			border-radius: 8px;
+
+			&.direction-up {
+				top: $first-row;
+				left: 50%;
+			}
+			&.direction-left {
+				top: $second-row;
+				left: 0;
+			}
+			&.direction-right {
+				top: $second-row;
+				left: 100%;
+			}
+			&.direction-down {
+				top: $third-row;
+				left: 50%;
+			}
+		}
+
+		.button-select {
+			top: $second-row;
+			left: 50%;
+			border-radius: $remote-button-size;
+		}
+
+		.button-home {
+			top: $first-row;
+			left: 100%;
+		}
+
+		.button-menu {
+			top: $third-row;
+			left: 0;
+		}
+
+		.button-osd {
+			top: $third-row;
+			left: 100%;
+		}
+
+		.button-back {
+			top: $first-row;
+			left: 0;
+		}
+	}
+}
