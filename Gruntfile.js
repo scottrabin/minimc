@@ -3,6 +3,9 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
 
+    "minimc-sass": {
+      dest: "app/css/wexbmc.css"
+    },
     browserify: {
       options: {
         transform: ['brfs'],
@@ -34,16 +37,6 @@ module.exports = function(grunt) {
       }
     },
     copy: {
-      font: {
-        files: [
-          {
-            expand: true,
-            cwd: './vendor/Font-Awesome/fonts/',
-            src: '*',
-            dest: 'app/assets/fonts'
-          }
-        ]
-      },
       dev: {
         files: [
           {
@@ -65,13 +58,6 @@ module.exports = function(grunt) {
         ]
       },
     },
-    sass: {
-      compile: {
-        files: {
-          "app/css/wexbmc.css": "src/sass/wexbmc.scss"
-        }
-      }
-    },
     watch: {
       html: {
         files: "src/index.html",
@@ -80,10 +66,6 @@ module.exports = function(grunt) {
       js: {
         files: ["src/**/*.js", "src/**/*.html"],
         tasks: ['browserify:dev']
-      },
-      css: {
-        files: 'src/sass/**/*',
-        tasks: ['sass']
       },
       devtools: {
         files: 'src/dev/**/*',
@@ -95,7 +77,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-browserify');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.loadNpmTasks('grunt-sass');
+  grunt.loadTasks('vendor/minimc-sass/tasks/');
 
-  grunt.registerTask('dev', ['copy:font', 'copy:dev', 'browserify:dev', 'browserify:devTool', 'sass', 'watch']);
+  grunt.registerTask('dev', ['copy:dev', 'minimc-sass', 'browserify:dev', 'browserify:devTool', 'watch']);
 };

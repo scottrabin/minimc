@@ -11,14 +11,13 @@
     "grunt-browserify": "^2.0.3",
     "grunt-contrib-copy": "^0.5.0",
     "grunt-contrib-watch": "^0.6.1",
-    "grunt-sass": "^0.12.1",
     "http-server": "^0.6.1",
     "karma": "~0.10",
     "protractor": "~0.17.0",
     "shelljs": "^0.2.6"
   },
   "scripts": {
-    "postinstall": "bower install",
+    "postinstall": "bower install && git submodule update --init --recursive",
     "start": "http-server -p 8000",
     "test": "karma start test/karma.conf.js",
     "update-webdriver": "webdriver-manager update",
