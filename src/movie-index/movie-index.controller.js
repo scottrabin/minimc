@@ -1,7 +1,7 @@
 "use strict";
 
 module.exports = function MovieIndexCtrl($scope, movies) {
-  movies.fetch().then(function(mvs) {
+  movies.getMovies().then(function(mvs) {
     $scope.movies = mvs;
   });
 };

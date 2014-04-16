@@ -1,7 +1,7 @@
 "use strict";
 
 module.exports = function DetailCtrl($scope, $routeParams, movies) {
-  movies.get($routeParams.movieSlug).then(function(movie) {
+  movies.getMovieBySlug($routeParams.movieSlug).then(function(movie) {
     $scope.movie = movie;
   })
 };

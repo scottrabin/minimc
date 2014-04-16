@@ -1,7 +1,7 @@
 "use strict";
 
 module.exports = function TvShowIndexCtrl($scope, tvshows) {
-  tvshows.fetch().then(function(shows) {
+  tvshows.getTVShows().then(function(shows) {
     $scope.tvshows = shows;
   });
 };

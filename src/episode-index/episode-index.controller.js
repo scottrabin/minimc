@@ -4,7 +4,8 @@ module.exports = function EpisodeIndexCtrl($scope, $routeParams, tvshows) {
   $scope.currentSeason = ($routeParams.hasOwnProperty('season') ?
                           parseInt($routeParams.season, 10) :
                           1);
-  tvshows.get($routeParams.showSlug).then(function(tvshow) {
+
+  tvshows.getShowBySlug($routeParams.showSlug).then(function(tvshow) {
     $scope.tvshow = tvshow;
 
     tvshows.getSeasons(tvshow).then(function(seasons) {

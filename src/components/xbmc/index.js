@@ -3,21 +3,14 @@
 require('angular');
 
 module.exports = angular.module('minimc.xbmc', [])
-  .constant('movieProperties', ["title", "genre", "year", "rating", "director",
-                                "trailer", "tagline", "plot", "plotoutline",
-                                "originaltitle", "lastplayed", "playcount",
-                                "writer", "studio", "mpaa", "cast", "country",
-                                "imdbnumber", "runtime", "set", "showlink",
-                                "streamdetails", "top250", "votes", "fanart",
-                                "thumbnail", "file", "sorttitle", "resume",
-                                "setid", "dateadded", "tag", "art"])
-  .constant('tvShowProperties', ["title", "genre", "year", "rating", "plot",
-                                 "studio", "mpaa", "cast", "playcount",
-                                 "episode", "imdbnumber", "premiered", "votes",
-                                 "lastplayed", "fanart", "thumbnail", "file",
-                                 "originaltitle", "sorttitle", "episodeguide",
-                                 "season", "watchedepisodes", "dateadded",
-                                 "tag", "art"])
+  .filter('artwork', require('./xbmc.artwork.filter'))
+
   .service('xbmc', require('./xbmc.service'))
   .service('movies', require('./xbmc.movies.service'))
   .service('tvshows', require('./xbmc.tvshows.service'))
+
+  .factory('Actor', require('./model/actor'))
+  .factory('Movie', require('./model/movie'))
+  .factory('TVShow', require('./model/tvshow'))
+  .factory('Season', require('./model/season'))
+  .factory('Episode', require('./model/episode'));

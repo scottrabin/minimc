@@ -1,11 +1,6 @@
 "use strict";
 
-var TVShow = require('../../minimc/tvshow');
-var Season = require('../../minimc/season');
-var Episode = require('../../minimc/episode');
-var compare = require('../../util/compare');
-
-module.exports = function TvShowService(xbmc, tvShowProperties) {
+module.exports = function TvShowService(xbmc, TVShow, Season, Episode, compare) {
   var cache = {
     tvshows: null,
     seasons: {},
@@ -13,11 +8,16 @@ module.exports = function TvShowService(xbmc, tvShowProperties) {
   };
 
   return {
-    fetch: function() {
+    getShowBySlug: function(slug) {
+      return this.getTVShows().then(function(shows) {
+        return shows[slug] || null;
+      });
+    },
+    getTVShows: function() {
       if (!cache.tvshows) {
         cache.tvshows = xbmc('VideoLibrary.GetTVShows', {
           data: {
-            properties: tvShowProperties
+            properties: TVShow.XBMC_PROPERTIES
           }
         }).then(function(response) {
           return response.data.result.tvshows
@@ -32,11 +32,6 @@ module.exports = function TvShowService(xbmc, tvShowProperties) {
         });
       }
       return cache.tvshows;
-    },
-    get: function(slug) {
-      return this.fetch().then(function(shows) {
-        return shows[slug] || null;
-      });
     },
     getSeasons: function(tvshow) {
       if (!cache.seasons[tvshow.getSlug()]) {
@@ -85,4 +80,4 @@ module.exports = function TvShowService(xbmc, tvShowProperties) {
   };
 };
 
-module.exports.$inject = ['xbmc', 'tvShowProperties'];
+module.exports.$inject = ['xbmc', 'TVShow', 'Season', 'Episode', 'compare'];
