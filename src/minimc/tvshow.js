@@ -13,6 +13,15 @@ function TVShow(tvshow) {
 }
 
 /**
+ * Get the unique identifier for the TV show
+ *
+ * @return {Number}
+ */
+TVShow.prototype.getId = function() {
+  return this._src.tvshowid;
+};
+
+/**
  * Get the title of the TV show
  *
  * @return {String}

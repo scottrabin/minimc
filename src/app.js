@@ -11,6 +11,7 @@ angular.module('minimc', [
   require('./detail').name,
   require('./movie-index').name,
   require('./tvshow-index').name,
+  require('./episode-index').name,
   require('./remote').name
 ])
 .filter('encodeURIComponent', [function() {

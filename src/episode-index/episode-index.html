@@ -1,0 +1,26 @@
+<ul id="tvshow-index">
+    <ol class="seasons">
+        <li class="season"
+            ng-repeat="season in seasons"
+            ng-class="{active: season.getSeason() === currentSeason}">
+            <a href="{{ season.getPermalink() }}">
+                <img ng-src="{{ season.getPosterArt() }}" />
+                <span class="season--number">{{ season.getSeason() }}</span>
+            </a>
+        </li>
+    </ol>
+    <ol class="episodes">
+        <li class="episode"
+            ng-repeat="episode in episodes"
+            ng-class="{hidden: episode.getSeason() !== currentSeason}">
+            <a href="{{ episode.getPermalink() }}">
+                <img ng-src="{{ episode.getThumbnailArt() }}" />
+                <div class="episode--metadata">
+                    <div class="episode--serial">S: {{ episode.getSeason() }} E: {{ episode.getEpisode() }}</div>
+                    <div class="episode--airdate">{{ episode.getAirDate() | date:'yyyy-MM-dd' }}</div>
+                </div>
+                <h3 class="episode--title">{{ episode.getTitle() }}</h3>
+            </a>
+        </li>
+    </ol>
+</ul>

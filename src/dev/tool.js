@@ -11,6 +11,8 @@ angular.module('minimc')
     // who might issue a takedown response for some copyright claims
     var responses = {
       "VideoLibrary.GetTVShows": fs.readFileSync(__dirname + '/VideoLibrary.GetTVShows.json', 'utf8'),
+      "VideoLibrary.GetSeasons": fs.readFileSync(__dirname + '/VideoLibrary.GetSeasons.json', 'utf8'),
+      "VideoLibrary.GetEpisodes": fs.readFileSync(__dirname + '/VideoLibrary.GetEpisodes.json', 'utf8'),
       "VideoLibrary.GetMovies": fs.readFileSync(__dirname + '/VideoLibrary.GetMovies.json', 'utf8')
     };
     // pass through all GET requests to any source files
