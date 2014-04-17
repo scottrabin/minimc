@@ -1,9 +1,13 @@
 "use strict";
 
 module.exports = function TvShowIndexCtrl($scope, tvshows) {
-  tvshows.getTVShows().then(function(shows) {
-    $scope.tvshows = shows;
-  });
+  $scope.tvshows = tvshows;
 };
 
 module.exports.$inject = ['$scope', 'tvshows'];
+
+module.exports.resolve = {
+  tvshows: ['tvshows', function(tvshows) {
+    return tvshows.getTVShows();
+  }]
+};

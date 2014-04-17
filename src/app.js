@@ -2,11 +2,11 @@
 
 // core libs
 require('angular');
-require('angular-route');
+require('angular-ui-router');
 
 // define the main application module
 angular.module('minimc', [
-  'ngRoute',
+  'ui.router',
   require('./components/xbmc').name,
   require('./movie-index').name,
   require('./tvshow-index').name,

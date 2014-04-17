@@ -16,7 +16,7 @@ module.exports = function(grunt) {
         options: {
           alias: [
             "bower_components/angular/angular.js:angular",
-            "bower_components/angular-route/angular-route.js:angular-route"
+            "bower_components/angular-ui-router/release/angular-ui-router"
           ]
         }
       },
@@ -27,7 +27,7 @@ module.exports = function(grunt) {
           ignore: ['bower_components/angular/angular.js'],
           alias: [
             "bower_components/angular/angular.js:angular",
-            "bower_components/angular-route/angular-route.js:angular-route"
+            "bower_components/angular-ui-router/release/angular-ui-router:angular-ui-router"
           ]
         }
       },
