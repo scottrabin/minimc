@@ -1,7 +1,7 @@
 "use strict";
 
 function getSeason(stateParam, seasons) {
-  var seasonMatch = stateParam.match(/\/S([0-9]+)/);
+  var seasonMatch = stateParam && stateParam.match(/\/S([0-9]+)/);
   return (seasonMatch ? parseInt(seasonMatch[1], 10) : seasons[0].getSeason());
 }
 
