@@ -23,13 +23,19 @@ module.exports = function($routeProvider) {
     controller: require('./tvshow-index/tvshow-index.controller')
   });
 
+  // episode detail
+  $routeProvider.when('/tv-shows/:showSlug/S:season?E:episode', {
+    template: fs.readFileSync(__dirname + '/detail/detail-episode.html', 'utf8'),
+    controller: require('./detail/detail-episode.controller')
+  });
+
   // episodes index
   var episodeIndex = {
     template: fs.readFileSync(__dirname + '/episode-index/episode-index.html', 'utf8'),
     controller: require('./episode-index/episode-index.controller')
   };
   $routeProvider.when('/tv-shows/:showSlug', episodeIndex);
-  $routeProvider.when('/tv-shows/:showSlug/S:season?', episodeIndex);
+  $routeProvider.when('/tv-shows/:showSlug/S:season', episodeIndex);
 
   // remote
   $routeProvider.when('/remote', {

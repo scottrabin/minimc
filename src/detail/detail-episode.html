@@ -1,0 +1,8 @@
+<a class="episode--previous" href="{{ previousEpisode.getPermalink() }}">{{ previousEpisode.getQualifiedIdentity() }}</a>
+<a class="episode--next" href="{{ nextEpisode.getPermalink() }}">{{ nextEpisode.getQualifiedIdentity() }}</a>
+<div id="tvshow-episode-view">
+    <img ng-src="{{ currentEpisode.getThumbnailArt() }}" />
+    <h3 class="episode--title">{{ currentEpisode.getTitle() }}</h3>
+    <p class="plot">{{ currentEpisode.getPlot() }}</p>
+</div>
+<mc-cast-list cast="currentEpisode.getCast()" />

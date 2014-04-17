@@ -1,6 +1,6 @@
 "use strict";
 
-module.exports = function EpisodeFactory(artworkFilter, padFilter) {
+module.exports = function EpisodeFactory(Actor, artworkFilter, padFilter) {
   /**
    * Class encapsulating the Episode data type
    *
@@ -40,12 +40,30 @@ module.exports = function EpisodeFactory(artworkFilter, padFilter) {
   };
 
   /**
+   * Get the season/episode qualifier
+   *
+   * @return {String}
+   */
+  Episode.prototype.getQualifiedIdentity = function() {
+    return "S" + padFilter(this.getSeason(), 2) + "E" + padFilter(this.getEpisode(), 2);
+  };
+
+  /**
    * Get the title for this episode
    *
    * @return {String}
    */
   Episode.prototype.getTitle = function() {
     return this._src.title;
+  };
+
+  /**
+   * Get the plot for this episode
+   *
+   * @return {String}
+   */
+  Episode.prototype.getPlot = function() {
+    return this._src.plot;
   };
 
   /**
@@ -58,12 +76,24 @@ module.exports = function EpisodeFactory(artworkFilter, padFilter) {
   };
 
   /**
+   * Get the list of cast members
+   *
+   * @return {Array<Actor>}
+   */
+  Episode.prototype.getCast = function() {
+    if (!this._cast) {
+      this._cast = this._src.cast.map(Actor.create);
+    }
+    return this._cast;
+  };
+
+  /**
    * Get the permalink for this episode
    *
    * @return {String}
    */
   Episode.prototype.getPermalink = function() {
-    return this.getTVShow().getPermalink() + "/S" + padFilter(this.getSeason(), 2) + "E" + padFilter(this.getEpisode(), 2);
+    return this.getTVShow().getPermalink() + "/" + this.getQualifiedIdentity();
   };
 
   /**
@@ -84,9 +114,10 @@ module.exports = function EpisodeFactory(artworkFilter, padFilter) {
    * Parameters to fetch from XBMC
    * @const {Array}
    */
-  Episode.XBMC_PROPERTIES = ['art', 'season', 'episode', 'title', 'firstaired'];
+  Episode.XBMC_PROPERTIES = ['art', 'season', 'episode', 'title', 'plot', 'cast',
+                             'firstaired'];
 
   return Episode;
 };
 
-module.exports.$inject = ['artworkFilter', 'padFilter'];
+module.exports.$inject = ['Actor', 'artworkFilter', 'padFilter'];
